@@ -6,14 +6,34 @@ const fadeUp = {
   visible: (delay = 0) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.95, ease: [0.22, 1, 0.36, 1] as const, delay: delay / 1000 },
+    transition: { duration: 1.45, ease: [0.22, 1, 0.36, 1] as const, delay: delay / 1000 },
   }),
+}
+
+const heroSequence = {
+  hidden: {},
+  visible: {
+    transition: {
+      delayChildren: 0.45,
+      staggerChildren: 0.22,
+    },
+  },
+}
+
+const heroItem = {
+  hidden: { opacity: 0, y: 28, filter: 'blur(5px)' },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: 'blur(0px)',
+    transition: { duration: 1.5, ease: [0.22, 1, 0.36, 1] as const },
+  },
 }
 
 export default function Hero() {
   const heroRef = useRef<HTMLElement>(null)
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] })
-  const bgY = useTransform(scrollYProgress, [0, 1], ['0%', '30%'])
+  const bgY = useTransform(scrollYProgress, [0, 1], ['0%', '42%'])
 
   return (
     <section className="hero" id="hero" ref={heroRef}>
@@ -24,9 +44,9 @@ export default function Hero() {
           alt="Background"
           className="hero-bg-img"
           style={{ y: bgY }}
-          initial={{ scale: 1.08 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 12, ease: [0.25, 0.46, 0.45, 0.94] }}
+          initial={{ scale: 1.18 }}
+          animate={{ scale: 1.08 }}
+          transition={{ duration: 14, ease: [0.25, 0.46, 0.45, 0.94] }}
         />
         <div className="hero-motion-layer" aria-hidden>
           <motion.div
@@ -62,16 +82,16 @@ export default function Hero() {
       </div>
 
       {/* ── Content grid ── */}
-      <div className="hero-content">
+      <motion.div className="hero-content" initial="hidden" animate="visible" variants={heroSequence}>
 
         {/* Left col: display name (top) + tagline/CTA (bottom) */}
-        <div className="hero-left">
+        <motion.div className="hero-left" variants={heroSequence}>
 
           {/* Big display name */}
           <div className="hero-name-block">
             <motion.h1
               className="hero-display-name"
-              initial="hidden" animate="visible" custom={0} variants={fadeUp}
+              variants={heroItem}
             >
               Navya
             </motion.h1>
@@ -81,7 +101,7 @@ export default function Hero() {
           <div className="hero-text-main">
             <motion.div
               className="hero-tagline-block"
-              initial="hidden" animate="visible" custom={260} variants={fadeUp}
+              variants={heroItem}
             >
               <p className="hero-tagline">
                 Designing experiences that feel as good as they function
@@ -93,32 +113,32 @@ export default function Hero() {
             <motion.a
               href="#contact"
               className="btn btn-outline hero-btn"
-              initial="hidden" animate="visible" custom={380} variants={fadeUp}
+              variants={heroItem}
               whileHover={{ scale: 1.04, transition: { duration: 0.2 } }}
               whileTap={{ scale: 0.97 }}
             >
               Resume ↗
             </motion.a>
           </div>
-        </div>
+        </motion.div>
 
         {/* Right col: title */}
-        <div className="hero-right">
+        <motion.div className="hero-right" variants={heroSequence}>
           <motion.h2
             className="hero-title"
-            initial="hidden" animate="visible" custom={160} variants={fadeUp}
+            variants={heroItem}
           >
             UI/UX &amp;<br />Product Design
           </motion.h2>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
       {/* Scroll indicator */}
       <motion.div
         className="hero-scroll"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.4, duration: 0.8 }}
+        transition={{ delay: 2.1, duration: 1.0 }}
       >
         <motion.div
           animate={{ y: [0, 6, 0] }}
