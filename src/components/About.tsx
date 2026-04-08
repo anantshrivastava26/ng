@@ -3,7 +3,7 @@ import { motion, useInView } from 'framer-motion'
 
 import SectionTag, { AboutIcon } from './SectionTag'
 
-const bioText = "I am a lifestyle-oriented product designer also specializing in UI/UX design. I'm passionate about creating intuitive and engaging user experiences."
+const bioText = "I am a lifestyle-oriented product designer specializing in UI/UX design, focused on creating intuitive and engaging experiences. My approach is rooted in research-led discovery to turn insights into thoughtful, impactful products."
 
 export default function About() {
   const sectionRef = useRef<HTMLDivElement>(null)

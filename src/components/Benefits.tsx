@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
 
-import SectionTag, { BenefitsIcon, DesignIcon, ThinkingIcon, TurnaroundIcon, WandIcon } from './SectionTag'
+import SectionTag, { BenefitsIcon, DesignIcon, ThinkingIcon, WandIcon } from './SectionTag'
 
 function BentoCard({
   children,
@@ -73,7 +73,7 @@ export default function Benefits() {
     <section className="section benefits" id="benefits">
       <div className="container">
         <div className="section-header">
-          <SectionTag label="Benefits" icon={<BenefitsIcon />} />
+          <SectionTag label="Methodology" icon={<BenefitsIcon />} />
           <div className="section-title-col">
             <motion.h2
               className="section-title"
@@ -100,7 +100,7 @@ export default function Benefits() {
           <BentoCard delay={0}>
             <div className="bento-top">
               <SectionTag label="Visual Design" icon={<DesignIcon />} className="small" />
-              <p className="bento-heading">Bridging user needs with objectives through data-led research</p>
+              <p className="bento-heading">Bridging user needs with business objectives through research-led discovery</p>
             </div>
             <div className="bento-bottom">
               <div className="bento-stat-label">Overthinking?</div>
@@ -141,13 +141,8 @@ export default function Benefits() {
           </BentoCard>
 
           <BentoCard className="bento-card--passion" delay={0.2}>
-            <img
-              src="https://framerusercontent.com/images/r1iWk48Uxe3ayq7tGpYIc5oxNw.png"
-              alt="Passion"
-              className="bento-passion-img"
-            />
             <div className="bento-top" style={{ position: 'relative', zIndex: 1 }}>
-              <SectionTag label="Personal Favourites" icon={<TurnaroundIcon />} className="small tag--muted" />
+              <SectionTag label="Personal Favourites" className="small tag--muted" />
               <p className="bento-heading">Driven by music, and never saying no to petting a dog.</p>
             </div>
             <div className="bento-bottom" style={{ position: 'relative', zIndex: 1 }}>

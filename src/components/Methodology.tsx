@@ -58,7 +58,7 @@ export default function Methodology() {
 
       <div className="container">
         <div className="section-header">
-          <SectionTag label="Methodology" icon={<MethodologyIcon />} className="tag--light" />
+          <SectionTag label="Skills" icon={<MethodologyIcon />} className="tag--light" />
           <div className="section-title-col">
             <motion.h2
               className="section-title light"
@@ -90,7 +90,6 @@ export default function Methodology() {
                 {tools.map(tool => (
                   <motion.li key={tool} className="tool-item" variants={itemVariants}>
                     <span>{tool}</span>
-                    <span className="tool-arrow">↗</span>
                   </motion.li>
                 ))}
               </motion.ul>
