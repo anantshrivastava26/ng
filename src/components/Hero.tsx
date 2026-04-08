@@ -6,7 +6,7 @@ const fadeUp = {
   visible: (delay = 0) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94] as const, delay: delay / 1000 },
+    transition: { duration: 0.95, ease: [0.22, 1, 0.36, 1] as const, delay: delay / 1000 },
   }),
 }
 
@@ -30,26 +30,31 @@ export default function Hero() {
         />
         <div className="hero-motion-layer" aria-hidden>
           <motion.div
-            className="hero-orb hero-orb-one"
-            animate={{ x: [0, 18, 0], y: [0, -24, 0], scale: [1, 1.06, 1] }}
-            transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
+            className="hero-motion-orb"
+            animate={{ scale: [1, 1.06, 1], rotate: [0, 4, 0] }}
+            transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
           />
           <motion.div
-            className="hero-orb hero-orb-two"
-            animate={{ x: [0, -20, 0], y: [0, 22, 0], scale: [1, 1.08, 1] }}
-            transition={{ duration: 8.5, repeat: Infinity, ease: 'easeInOut' }}
-          />
-          <motion.div
-            className="hero-orbit-ring"
-            animate={{ rotate: 360 }}
-            transition={{ duration: 18, repeat: Infinity, ease: 'linear' }}
+            className="hero-depth-word"
+            animate={{ scale: [1, 1.03, 1] }}
+            transition={{ duration: 16, repeat: Infinity, ease: 'easeInOut' }}
           >
-            <span className="hero-orbit-dot" />
+            NAVYA
           </motion.div>
           <motion.div
-            className="hero-light-sweep"
-            animate={{ x: ['-120%', '120%'] }}
-            transition={{ duration: 7.5, repeat: Infinity, ease: 'easeInOut' }}
+            className="hero-swiss-grid"
+            animate={{ x: [0, -22] }}
+            transition={{ duration: 16, repeat: Infinity, ease: 'linear' }}
+          />
+          <motion.div
+            className="hero-axis-line hero-axis-line-top"
+            animate={{ x: ['-6%', '12%'] }}
+            transition={{ duration: 11, repeat: Infinity, repeatType: 'mirror', ease: [0.22, 1, 0.36, 1] }}
+          />
+          <motion.div
+            className="hero-axis-line hero-axis-line-bottom"
+            animate={{ x: ['8%', '-10%'] }}
+            transition={{ duration: 13, repeat: Infinity, repeatType: 'mirror', ease: [0.22, 1, 0.36, 1] }}
           />
         </div>
         <div className="hero-overlay" />
@@ -102,7 +107,7 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Right col: title + featured card, aligned to bottom */}
+        {/* Right col: title */}
         <div className="hero-right">
           <motion.h2
             className="hero-title"
@@ -110,22 +115,6 @@ export default function Hero() {
           >
             UI/UX &amp;<br />Product Design
           </motion.h2>
-          <motion.div
-            className="hero-card"
-            initial="hidden" animate="visible" custom={320} variants={fadeUp}
-            whileHover={{ scale: 1.025, transition: { duration: 0.3 } }}
-          >
-            <img
-              src="https://framerusercontent.com/images/hIMdQAU8hOgi8GFT4vPLwwAILz0.png"
-              alt="Saanjh"
-              className="hero-card-bg"
-            />
-            <div className="hero-card-inner">
-              <div className="hero-card-label">Featured Project</div>
-              <div className="hero-card-name">Saanjh</div>
-              <div className="hero-card-desc">A Digital Experience for Craft-Led Lighting</div>
-            </div>
-          </motion.div>
         </div>
       </div>
 

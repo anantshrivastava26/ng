@@ -11,6 +11,7 @@ import Methodology from './components/Methodology'
 import Articles from './components/Articles'
 import Footer from './components/Footer'
 import LoadingScreen from './components/LoadingScreen'
+import SmoothScroll from './components/SmoothScroll'
 
 export default function App() {
   const [showLoader, setShowLoader] = useState(true)
@@ -22,6 +23,7 @@ export default function App() {
 
   return (
     <>
+      <SmoothScroll />
       <AnimatePresence>
         {showLoader && <LoadingScreen />}
       </AnimatePresence>
