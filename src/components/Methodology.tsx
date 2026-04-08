@@ -1,11 +1,34 @@
 import { motion } from 'framer-motion'
 
+import SectionTag, { MethodologyIcon } from './SectionTag'
+
 const tools = [
   'Figma', 'Adobe Photoshop', 'Adobe Illustrator',
   'Adobe InDesign', 'AutoCAD', '3Ds Max', 'Blender', 'Framer',
 ]
 
-const logos = ['Figma', 'Ps', 'Ai', 'Blender', 'Framer']
+const logos = [
+  {
+    name: 'Figma',
+    src: '/assets/logos/figma.svg',
+  },
+  {
+    name: 'Adobe Photoshop',
+    src: '/assets/logos/photoshop.svg',
+  },
+  {
+    name: 'Adobe Illustrator',
+    src: '/assets/logos/illustrator.svg',
+  },
+  {
+    name: 'Blender',
+    src: '/assets/logos/blender.svg',
+  },
+  {
+    name: 'Framer',
+    src: '/assets/logos/framer.svg',
+  },
+]
 
 const containerVariants = {
   hidden: {},
@@ -35,15 +58,7 @@ export default function Methodology() {
 
       <div className="container">
         <div className="section-header">
-          <motion.div
-            className="tag tag--light"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.6 }}
-          >
-            Methodology
-          </motion.div>
+          <SectionTag label="Methodology" icon={<MethodologyIcon />} className="tag--light" />
           <div className="section-title-col">
             <motion.h2
               className="section-title light"
@@ -84,7 +99,7 @@ export default function Methodology() {
             <div className="logo-grid">
               {logos.map((logo, i) => (
                 <motion.div
-                  key={logo}
+                  key={logo.name}
                   className="logo-cell"
                   custom={i}
                   variants={logoVariants}
@@ -93,7 +108,10 @@ export default function Methodology() {
                   viewport={{ once: true, margin: '-60px' }}
                   whileHover={{ background: 'rgba(255,255,255,0.15)', color: '#fff', scale: 1.05 }}
                 >
-                  {logo}
+                  <div className="logo-mark" aria-hidden="true">
+                    <img src={logo.src} alt="" />
+                  </div>
+                  <span className="sr-only">{logo.name}</span>
                 </motion.div>
               ))}
             </div>

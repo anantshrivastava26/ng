@@ -1,6 +1,8 @@
 import { useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
 
+import SectionTag, { BenefitsIcon, DesignIcon, ThinkingIcon, TurnaroundIcon } from './SectionTag'
+
 function BentoCard({
   children,
   className = '',
@@ -69,15 +71,7 @@ export default function Benefits() {
     <section className="section benefits" id="benefits">
       <div className="container">
         <div className="section-header">
-          <motion.div
-            className="tag"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.6 }}
-          >
-            Benefits
-          </motion.div>
+          <SectionTag label="Benefits" icon={<BenefitsIcon />} />
           <div className="section-title-col">
             <motion.h2
               className="section-title"
@@ -103,7 +97,7 @@ export default function Benefits() {
         <div className="bento-grid">
           <BentoCard delay={0}>
             <div className="bento-top">
-              <div className="tag small">Visual Design</div>
+              <SectionTag label="Visual Design" icon={<DesignIcon />} className="small" />
               <p className="bento-heading">Bridging user needs with objectives through data-led research</p>
             </div>
             <div className="bento-bottom">
@@ -115,7 +109,7 @@ export default function Benefits() {
 
           <BentoCard className="bento-card--center" delay={0.1}>
             <div className="bento-top">
-              <div className="tag small">Design Thinking</div>
+              <SectionTag label="Design Thinking" icon={<ThinkingIcon />} className="small" />
               <p className="bento-heading">Developing high fidelity interfaces that balance beauty and usability.</p>
             </div>
             <div className="bento-phone-wrapper">
@@ -148,7 +142,7 @@ export default function Benefits() {
               className="bento-passion-img"
             />
             <div className="bento-top" style={{ position: 'relative', zIndex: 1 }}>
-              <div className="tag small tag--muted">Fast turnarounds</div>
+              <SectionTag label="Fast turnarounds" icon={<TurnaroundIcon />} className="small tag--muted" />
               <p className="bento-heading">Passionate about something.</p>
             </div>
             <div className="bento-bottom" style={{ position: 'relative', zIndex: 1 }}>
