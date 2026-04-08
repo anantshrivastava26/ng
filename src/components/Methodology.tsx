@@ -2,6 +2,29 @@ import { motion } from 'framer-motion'
 
 import SectionTag, { MethodologyIcon } from './SectionTag'
 
+const methodologyHeading = "The best results don't come from guesswork. They come from a proven process."
+const methodologyHeadingWords = methodologyHeading.split(' ')
+
+const revealContainerVariants = {
+  hidden: {},
+  visible: (delay = 0) => ({
+    transition: {
+      delayChildren: delay,
+      staggerChildren: 0.09,
+    },
+  }),
+}
+
+const revealWordVariants = {
+  hidden: { opacity: 0, y: 10, filter: 'blur(3px)' },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: 'blur(0px)',
+    transition: { duration: 1.1, ease: [0.22, 1, 0.36, 1] as const },
+  },
+}
+
 const tools = [
   'Figma', 'Adobe Photoshop', 'Adobe Illustrator',
   'Adobe InDesign', 'AutoCAD', '3Ds Max', 'Blender', 'Framer',
@@ -62,12 +85,17 @@ export default function Methodology() {
           <div className="section-title-col">
             <motion.h2
               className="section-title light"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              variants={revealContainerVariants}
+              custom={0.14}
+              initial="hidden"
+              whileInView="visible"
               viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.8, delay: 0.1 }}
             >
-              The best results don't come from guesswork. They come from a proven process.
+              {methodologyHeadingWords.map((word, index) => (
+                <motion.span key={`${word}-${index}`} className="method-reveal-word" variants={revealWordVariants}>
+                  {word}
+                </motion.span>
+              ))}
             </motion.h2>
 
             <div className="tools-block">

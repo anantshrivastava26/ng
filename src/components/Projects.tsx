@@ -3,6 +3,34 @@ import { motion } from 'framer-motion'
 
 import SectionTag, { WorkIcon } from './SectionTag'
 
+const projectsHeading = 'Projects'
+const projectsSubheading = '(Selected Works)'
+const projectsDescription = 'Projects that highlight my process—from research and ideation to execution—showcasing both strategic thinking and craft.'
+
+const projectsHeadingWords = projectsHeading.split(' ')
+const projectsSubheadingWords = projectsSubheading.split(' ')
+const projectsDescriptionWords = projectsDescription.split(' ')
+
+const revealContainerVariants = {
+  hidden: {},
+  visible: (delay = 0) => ({
+    transition: {
+      delayChildren: delay,
+      staggerChildren: 0.09,
+    },
+  }),
+}
+
+const revealWordVariants = {
+  hidden: { opacity: 0, y: 10, filter: 'blur(3px)' },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: 'blur(0px)',
+    transition: { duration: 1.1, ease: [0.22, 1, 0.36, 1] as const },
+  },
+}
+
 interface Project {
   name: string
   desc: string
@@ -114,30 +142,45 @@ export default function Projects() {
           <div className="section-title-col">
             <motion.h2
               className="section-title display"
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              variants={revealContainerVariants}
+              custom={0.1}
+              initial="hidden"
+              whileInView="visible"
               viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.8, delay: 0.1 }}
             >
-              Projects
+              {projectsHeadingWords.map((word, index) => (
+                <motion.span key={`${word}-${index}`} className="projects-reveal-word" variants={revealWordVariants}>
+                  {word}
+                </motion.span>
+              ))}
             </motion.h2>
             <motion.p
               className="section-body"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              variants={revealContainerVariants}
+              custom={0.2}
+              initial="hidden"
+              whileInView="visible"
               viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.6, delay: 0.2 }}
             >
-              (Selected Works)
+              {projectsSubheadingWords.map((word, index) => (
+                <motion.span key={`${word}-${index}`} className="projects-reveal-word" variants={revealWordVariants}>
+                  {word}
+                </motion.span>
+              ))}
             </motion.p>
             <motion.p
               className="section-desc"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              variants={revealContainerVariants}
+              custom={0.3}
+              initial="hidden"
+              whileInView="visible"
               viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.6, delay: 0.3 }}
             >
-              Projects that highlight my process—from research and ideation to execution—showcasing both strategic thinking and craft.
+              {projectsDescriptionWords.map((word, index) => (
+                <motion.span key={`${word}-${index}`} className="projects-reveal-word" variants={revealWordVariants}>
+                  {word}
+                </motion.span>
+              ))}
             </motion.p>
             <motion.a
               href={BEHANCE_PROFILE}

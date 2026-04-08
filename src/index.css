@@ -987,6 +987,11 @@ img { display: block; max-width: 100%; }
   color: var(--accent);
 }
 
+.projects-reveal-word {
+  display: inline-block;
+  margin-right: 0.2em;
+}
+
 /* Background grid lines */
 .bg-lines {
   position: absolute;
@@ -1132,6 +1137,11 @@ img { display: block; max-width: 100%; }
 
 .methodology .container { position: relative; z-index: 1; }
 .methodology .section-header { grid-template-columns: 1fr 2fr; }
+
+.method-reveal-word {
+  display: inline-block;
+  margin-right: 0.2em;
+}
 
 .tools-block {
   display: flex;
