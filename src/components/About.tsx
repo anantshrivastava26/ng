@@ -23,6 +23,41 @@ export default function About() {
         <SectionTag label="About" icon={<AboutIcon />} align="center" className="about-tag" />
 
         <div className="about-shell">
+          <motion.figure
+            className="about-visual"
+            ref={imageRef}
+            initial={{ opacity: 0, y: 40, scale: 0.98 }}
+            animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+            transition={{ duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94] }}
+          >
+            <div className="about-accent" aria-hidden="true" />
+            <div className="about-image-wrap">
+              <img
+                src="https://framerusercontent.com/images/5v6LYuo0lCrG85IgnWHCWsFaZU.png"
+                alt="Navya Grover"
+                className="about-img"
+              />
+            </div>
+            <div className="about-copy">
+              <motion.h2
+                className="about-hello"
+                initial={{ opacity: 0, x: 18 }}
+                animate={isInView ? { opacity: 1, x: 0 } : {}}
+                transition={{ duration: 0.7, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
+              >
+                Hello!
+              </motion.h2>
+              <motion.p
+                className="about-caption"
+                initial={{ opacity: 0, x: 18 }}
+                animate={isInView ? { opacity: 1, x: 0 } : {}}
+                transition={{ duration: 0.7, delay: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
+              >
+                UI/UX & Product Designer
+              </motion.p>
+            </div>
+          </motion.figure>
+
           <motion.div
             className="about-content"
             ref={contentRef}
@@ -70,41 +105,6 @@ export default function About() {
               Explore work
             </motion.a>
           </motion.div>
-
-          <motion.figure
-            className="about-visual"
-            ref={imageRef}
-            initial={{ opacity: 0, y: 40, scale: 0.98 }}
-            animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
-            transition={{ duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94] }}
-          >
-            <div className="about-accent" aria-hidden="true" />
-            <div className="about-image-wrap">
-              <img
-                src="https://framerusercontent.com/images/5v6LYuo0lCrG85IgnWHCWsFaZU.png"
-                alt="Navya Grover"
-                className="about-img"
-              />
-            </div>
-            <div className="about-copy">
-              <motion.h2
-                className="about-hello"
-                initial={{ opacity: 0, x: 18 }}
-                animate={isInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.7, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
-              >
-                Hello!
-              </motion.h2>
-              <motion.p
-                className="about-caption"
-                initial={{ opacity: 0, x: 18 }}
-                animate={isInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.7, delay: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
-              >
-                UI/UX & Product Designer
-              </motion.p>
-            </div>
-          </motion.figure>
         </div>
       </div>
     </section>

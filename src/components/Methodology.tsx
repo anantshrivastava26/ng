@@ -7,7 +7,28 @@ const tools = [
   'Adobe InDesign', 'AutoCAD', '3Ds Max', 'Blender', 'Framer',
 ]
 
-const logos = ['Figma', 'Ps', 'Ai', 'Blender', 'Framer']
+const logos = [
+  {
+    name: 'Figma',
+    src: '/assets/logos/figma.svg',
+  },
+  {
+    name: 'Adobe Photoshop',
+    src: '/assets/logos/photoshop.svg',
+  },
+  {
+    name: 'Adobe Illustrator',
+    src: '/assets/logos/illustrator.svg',
+  },
+  {
+    name: 'Blender',
+    src: '/assets/logos/blender.svg',
+  },
+  {
+    name: 'Framer',
+    src: '/assets/logos/framer.svg',
+  },
+]
 
 const containerVariants = {
   hidden: {},
@@ -78,7 +99,7 @@ export default function Methodology() {
             <div className="logo-grid">
               {logos.map((logo, i) => (
                 <motion.div
-                  key={logo}
+                  key={logo.name}
                   className="logo-cell"
                   custom={i}
                   variants={logoVariants}
@@ -87,7 +108,10 @@ export default function Methodology() {
                   viewport={{ once: true, margin: '-60px' }}
                   whileHover={{ background: 'rgba(255,255,255,0.15)', color: '#fff', scale: 1.05 }}
                 >
-                  {logo}
+                  <div className="logo-mark" aria-hidden="true">
+                    <img src={logo.src} alt="" />
+                  </div>
+                  <span className="sr-only">{logo.name}</span>
                 </motion.div>
               ))}
             </div>
