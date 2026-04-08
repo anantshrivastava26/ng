@@ -36,7 +36,7 @@ export default function Hero() {
           />
           <motion.div
             className="hero-depth-word"
-            style={{ scaleY: 1.2 }}
+            style={{ scaleY: 2 }}
             animate={{ scale: [1, 1.03, 1] }}
             transition={{ duration: 16, repeat: Infinity, ease: 'easeInOut' }}
           >
