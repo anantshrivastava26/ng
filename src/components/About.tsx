@@ -5,6 +5,7 @@ import SectionTag, { AboutIcon } from './SectionTag'
 
 const bioText = "I am a lifestyle-oriented product designer specializing in UI/UX design, focused on creating intuitive and engaging experiences. My approach is rooted in research-led discovery to turn insights into thoughtful, impactful products."
 const bioWords = bioText.split(' ')
+const aboutPills = ['Research-led discovery', 'Interface systems', 'Human-centered storytelling']
 
 const bioContainerVariants = {
   hidden: {},
@@ -13,6 +14,26 @@ const bioContainerVariants = {
       delayChildren: 0.2,
       staggerChildren: 0.09,
     },
+  },
+}
+
+const pillContainerVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      delayChildren: 1.35,
+      staggerChildren: 0.24,
+    },
+  },
+}
+
+const pillVariants = {
+  hidden: { opacity: 0, y: 16, filter: 'blur(6px)' },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: 'blur(0px)',
+    transition: { duration: 1.7, ease: [0.22, 1, 0.36, 1] as const },
   },
 }
 
@@ -69,6 +90,19 @@ export default function About() {
                 </motion.span>
               ))}
             </motion.p>
+
+            <motion.div
+              className="about-pills"
+              variants={pillContainerVariants}
+              initial="hidden"
+              animate={isInView ? 'visible' : 'hidden'}
+            >
+              {aboutPills.map((pill, index) => (
+                <motion.span key={pill} className="about-pill" variants={pillVariants}>
+                  {pill}
+                </motion.span>
+              ))}
+            </motion.div>
           </motion.div>
         </div>
       </div>

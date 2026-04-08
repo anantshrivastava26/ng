@@ -14,6 +14,7 @@ import SmoothScroll from './components/SmoothScroll'
 
 export default function App() {
   const [showLoader, setShowLoader] = useState(true)
+  const [showContent, setShowContent] = useState(false)
 
   useEffect(() => {
     const timer = window.setTimeout(() => setShowLoader(false), 2500)
@@ -23,20 +24,24 @@ export default function App() {
   return (
     <>
       <SmoothScroll />
-      <AnimatePresence>
+      <AnimatePresence onExitComplete={() => setShowContent(true)}>
         {showLoader && <LoadingScreen />}
       </AnimatePresence>
-      <Cursor />
-      <ScrollProgress />
-      <Navbar />
-      <main>
-        <Hero />
-        <About />
-        <Benefits />
-        <Projects />
-        <Methodology />
-      </main>
-      <Footer />
+      {showContent && (
+        <>
+          <Cursor />
+          <ScrollProgress />
+          <Navbar />
+          <main>
+            <Hero />
+            <About />
+            <Benefits />
+            <Projects />
+            <Methodology />
+          </main>
+          <Footer />
+        </>
+      )}
     </>
   )
 }
