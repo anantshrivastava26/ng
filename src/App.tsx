@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react'
+import { AnimatePresence } from 'framer-motion'
 import Cursor from './components/Cursor'
 import ScrollProgress from './components/ScrollProgress'
 import Navbar from './components/Navbar'
@@ -8,10 +10,21 @@ import Projects from './components/Projects'
 import Methodology from './components/Methodology'
 import Articles from './components/Articles'
 import Footer from './components/Footer'
+import LoadingScreen from './components/LoadingScreen'
 
 export default function App() {
+  const [showLoader, setShowLoader] = useState(true)
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => setShowLoader(false), 5000)
+    return () => window.clearTimeout(timer)
+  }, [])
+
   return (
     <>
+      <AnimatePresence>
+        {showLoader && <LoadingScreen />}
+      </AnimatePresence>
       <Cursor />
       <ScrollProgress />
       <Navbar />

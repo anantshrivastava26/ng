@@ -28,6 +28,30 @@ export default function Hero() {
           animate={{ scale: 1 }}
           transition={{ duration: 12, ease: [0.25, 0.46, 0.45, 0.94] }}
         />
+        <div className="hero-motion-layer" aria-hidden>
+          <motion.div
+            className="hero-orb hero-orb-one"
+            animate={{ x: [0, 18, 0], y: [0, -24, 0], scale: [1, 1.06, 1] }}
+            transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
+          />
+          <motion.div
+            className="hero-orb hero-orb-two"
+            animate={{ x: [0, -20, 0], y: [0, 22, 0], scale: [1, 1.08, 1] }}
+            transition={{ duration: 8.5, repeat: Infinity, ease: 'easeInOut' }}
+          />
+          <motion.div
+            className="hero-orbit-ring"
+            animate={{ rotate: 360 }}
+            transition={{ duration: 18, repeat: Infinity, ease: 'linear' }}
+          >
+            <span className="hero-orbit-dot" />
+          </motion.div>
+          <motion.div
+            className="hero-light-sweep"
+            animate={{ x: ['-120%', '120%'] }}
+            transition={{ duration: 7.5, repeat: Infinity, ease: 'easeInOut' }}
+          />
+        </div>
         <div className="hero-overlay" />
       </div>
 
