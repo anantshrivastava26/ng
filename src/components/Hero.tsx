@@ -20,7 +20,7 @@ export default function Hero() {
       {/* ── Background ── */}
       <div className="hero-bg">
         <motion.img
-          src="https://framerusercontent.com/images/PkcMje8K9abiM4x9FIaeR5h65Y.png"
+          src="/assets/logos/hero.png"
           alt="Background"
           className="hero-bg-img"
           style={{ y: bgY }}
@@ -39,7 +39,7 @@ export default function Hero() {
             animate={{ scale: [1, 1.03, 1] }}
             transition={{ duration: 16, repeat: Infinity, ease: 'easeInOut' }}
           >
-            PORTFOLIO
+            Driven by curiosity
           </motion.div>
           <motion.div
             className="hero-swiss-grid"
