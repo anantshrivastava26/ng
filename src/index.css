@@ -729,9 +729,15 @@ img { display: block; max-width: 100%; }
   font-weight: 700;
   line-height: 1.3;
   letter-spacing: -0.03em;
+  word-spacing: 0.12em;
   color: #111;
   max-width: 34ch;
   text-align: left;
+}
+
+.about-word {
+  display: inline-block;
+  margin-right: 0.2em;
 }
 
 /* ── Benefits / Bento Grid ──────────────────────────────────────────────── */
