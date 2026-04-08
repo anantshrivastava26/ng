@@ -3,6 +3,32 @@ import { motion, useInView } from 'framer-motion'
 
 import SectionTag, { BenefitsIcon, DesignIcon, ThinkingIcon, WandIcon } from './SectionTag'
 
+const benefitsTitle = 'From Thought to Experience — My design perspective'
+const benefitsBody = "I don't just design interfaces—I design experiences rooted in real human behavior. I question, observe, and translate insights into solutions that feel natural, intuitive, and emotionally resonant."
+
+const benefitsTitleWords = benefitsTitle.split(' ')
+const benefitsBodyWords = benefitsBody.split(' ')
+
+const revealContainerVariants = {
+  hidden: {},
+  visible: (delay = 0) => ({
+    transition: {
+      delayChildren: delay,
+      staggerChildren: 0.09,
+    },
+  }),
+}
+
+const revealWordVariants = {
+  hidden: { opacity: 0, y: 10, filter: 'blur(3px)' },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: 'blur(0px)',
+    transition: { duration: 1.1, ease: [0.22, 1, 0.36, 1] as const },
+  },
+}
+
 function BentoCard({
   children,
   className = '',
@@ -77,21 +103,31 @@ export default function Benefits() {
           <div className="section-title-col">
             <motion.h2
               className="section-title"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              variants={revealContainerVariants}
+              custom={0.1}
+              initial="hidden"
+              whileInView="visible"
               viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.7, delay: 0.1 }}
             >
-              From Thought to Experience — My design perspective
+              {benefitsTitleWords.map((word, index) => (
+                <motion.span key={`${word}-${index}`} className="benefits-word" variants={revealWordVariants}>
+                  {word}
+                </motion.span>
+              ))}
             </motion.h2>
             <motion.p
               className="section-body"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              variants={revealContainerVariants}
+              custom={0.22}
+              initial="hidden"
+              whileInView="visible"
               viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.6, delay: 0.2 }}
             >
-              I don't just design interfaces—I design experiences rooted in real human behavior. I question, observe, and translate insights into solutions that feel natural, intuitive, and emotionally resonant.
+              {benefitsBodyWords.map((word, index) => (
+                <motion.span key={`${word}-${index}`} className="benefits-word" variants={revealWordVariants}>
+                  {word}
+                </motion.span>
+              ))}
             </motion.p>
           </div>
         </div>
