@@ -142,11 +142,16 @@ export default function Benefits() {
           </BentoCard>
 
           <BentoCard className="bento-card--passion" delay={0.2}>
-            <div className="bento-top">
+            <img
+              src="https://framerusercontent.com/images/r1iWk48Uxe3ayq7tGpYIc5oxNw.png"
+              alt="Passion"
+              className="bento-passion-img"
+            />
+            <div className="bento-top" style={{ position: 'relative', zIndex: 1 }}>
               <div className="tag small tag--muted">Fast turnarounds</div>
               <p className="bento-heading">Passionate about something.</p>
             </div>
-            <div className="bento-bottom">
+            <div className="bento-bottom" style={{ position: 'relative', zIndex: 1 }}>
               <div className="bento-stat-label">Details?</div>
               <motion.div
                 className="bento-stat bento-stat--large"

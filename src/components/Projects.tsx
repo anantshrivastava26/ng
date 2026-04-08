@@ -5,14 +5,32 @@ interface Project {
   name: string
   desc: string
   tag: string
-  bg: string
+  image: string
   offset?: boolean
 }
 
+const BASE = 'https://framerusercontent.com/images/'
+
 const projects: Project[] = [
-  { name: 'Saanjh', desc: 'A Digital Experience for Craft-Led Lighting', tag: 'UI/UX', bg: '#1a1a2e' },
-  { name: 'Pawzo', desc: 'A trusted stay platform for pet owners', tag: 'Product', bg: '#0d1b2a', offset: true },
-  { name: 'NeuroVisoX', desc: 'A futuristic smart helmet with automated visor system', tag: 'Industrial', bg: '#16213e' },
+  {
+    name: 'Saanjh',
+    desc: 'A Digital Experience for Craft-Led Lighting',
+    tag: 'UI/UX',
+    image: `${BASE}hIMdQAU8hOgi8GFT4vPLwwAILz0.png`,
+  },
+  {
+    name: 'Pawzo',
+    desc: 'A trusted stay platform for pet owners',
+    tag: 'Product',
+    image: `${BASE}n4liRTOFULOzrRSiz5FpMfnQdhM.png`,
+    offset: true,
+  },
+  {
+    name: 'NeuroVisoX',
+    desc: 'A futuristic smart helmet with automated visor system',
+    tag: 'Industrial',
+    image: `${BASE}g7XqvCI9pFeszONDlK6OO4qtYY.png`,
+  },
 ]
 
 function ProjectTile({ project, index }: { project: Project; index: number }) {
@@ -42,7 +60,6 @@ function ProjectTile({ project, index }: { project: Project; index: number }) {
         ref={imgRef}
         className="project-tile-img"
         style={{
-          background: project.bg,
           rotateY: tilt.x,
           rotateX: tilt.y,
           transformPerspective: 800,
@@ -50,6 +67,7 @@ function ProjectTile({ project, index }: { project: Project; index: number }) {
         transition={{ type: 'spring', stiffness: 200, damping: 25 }}
         whileHover={{ scale: 0.97 }}
       >
+        <img src={project.image} alt={project.name} className="project-tile-photo" />
         <div className="project-tag">{project.tag}</div>
       </motion.div>
       <div className="project-tile-info">

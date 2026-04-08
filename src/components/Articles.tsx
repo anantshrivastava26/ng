@@ -1,8 +1,20 @@
 import { motion } from 'framer-motion'
 
+const BASE = 'https://framerusercontent.com/images/'
+
 const articles = [
-  { tag: 'Branding', title: 'Why Your Brand Identity Matters More Than Your Logo', year: '2025' },
-  { tag: 'Strategy', title: 'The Power of Storytelling in Branding', year: '2025' },
+  {
+    tag: 'Branding',
+    title: 'Why Your Brand Identity Matters More Than Your Logo',
+    year: 'Jul 27, 2025',
+    image: `${BASE}H7pmHxrsHkVjHKJY8oD7Oy6ck.png`,
+  },
+  {
+    tag: 'Strategy',
+    title: 'The Power of Storytelling in Branding',
+    year: 'Jul 24, 2025',
+    image: `${BASE}WLXVB4pWpJwh51oTL3zjz6VJyA.png`,
+  },
 ]
 
 export default function Articles() {
@@ -61,6 +73,9 @@ export default function Articles() {
               transition={{ duration: 0.7, delay: i * 0.12 }}
               whileHover={{ y: -4 }}
             >
+              <div className="article-img-wrap">
+                <img src={article.image} alt={article.title} className="article-img" />
+              </div>
               <div className="article-tag">{article.tag}</div>
               <h3>{article.title}</h3>
               <div className="article-meta">

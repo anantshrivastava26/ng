@@ -91,6 +91,11 @@ export default function Hero() {
             initial="hidden" animate="visible" custom={320} variants={fadeUp}
             whileHover={{ scale: 1.025, transition: { duration: 0.3 } }}
           >
+            <img
+              src="https://framerusercontent.com/images/hIMdQAU8hOgi8GFT4vPLwwAILz0.png"
+              alt="Saanjh"
+              className="hero-card-bg"
+            />
             <div className="hero-card-inner">
               <div className="hero-card-label">Featured Project</div>
               <div className="hero-card-name">Saanjh</div>

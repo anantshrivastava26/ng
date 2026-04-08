@@ -8,13 +8,10 @@ export default function Cursor() {
   const mouseX = useMotionValue(-100)
   const mouseY = useMotionValue(-100)
 
-  // Fast dot
-  const dotX = useSpring(mouseX, { stiffness: 600, damping: 35 })
-  const dotY = useSpring(mouseY, { stiffness: 600, damping: 35 })
-
-  // Slow ring
-  const ringX = useSpring(mouseX, { stiffness: 120, damping: 18 })
-  const ringY = useSpring(mouseY, { stiffness: 120, damping: 18 })
+  // Dot: NO spring — follows mouse with zero lag (direct motion value)
+  // Ring: tight spring for a smooth but barely-lagging trail
+  const ringX = useSpring(mouseX, { stiffness: 500, damping: 40, restDelta: 0.001 })
+  const ringY = useSpring(mouseY, { stiffness: 500, damping: 40, restDelta: 0.001 })
 
   useEffect(() => {
     // Only show on fine pointer devices
@@ -57,7 +54,7 @@ export default function Cursor() {
     <>
       <motion.div
         className="cursor"
-        style={{ x: dotX, y: dotY, translateX: '-50%', translateY: '-50%' }}
+        style={{ x: mouseX, y: mouseY, translateX: '-50%', translateY: '-50%' }}
       />
       <motion.div
         className="cursor-ring"
