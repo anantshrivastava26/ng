@@ -39,7 +39,7 @@ export default function Hero() {
             animate={{ scale: [1, 1.03, 1] }}
             transition={{ duration: 16, repeat: Infinity, ease: 'easeInOut' }}
           >
-            NAVYA
+            PORTFOLIO
           </motion.div>
           <motion.div
             className="hero-swiss-grid"

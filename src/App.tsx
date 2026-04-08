@@ -8,7 +8,6 @@ import About from './components/About'
 import Benefits from './components/Benefits'
 import Projects from './components/Projects'
 import Methodology from './components/Methodology'
-import Articles from './components/Articles'
 import Footer from './components/Footer'
 import LoadingScreen from './components/LoadingScreen'
 import SmoothScroll from './components/SmoothScroll'
@@ -17,7 +16,7 @@ export default function App() {
   const [showLoader, setShowLoader] = useState(true)
 
   useEffect(() => {
-    const timer = window.setTimeout(() => setShowLoader(false), 5000)
+    const timer = window.setTimeout(() => setShowLoader(false), 2500)
     return () => window.clearTimeout(timer)
   }, [])
 
@@ -36,7 +35,6 @@ export default function App() {
         <Benefits />
         <Projects />
         <Methodology />
-        <Articles />
       </main>
       <Footer />
     </>

@@ -1,10 +1,8 @@
 import { useState } from 'react'
-import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
-  const { scrollY } = useScroll()
-  const bgOpacity = useTransform(scrollY, [0, 80], [0, 1])
 
   const navLinks = [
     { label: 'Home', href: '#hero' },
@@ -16,20 +14,6 @@ export default function Navbar() {
   return (
     <>
       <motion.nav className="navbar">
-        {/* Scrolled background */}
-        <motion.div
-          style={{
-            position: 'absolute',
-            inset: 0,
-            background: 'rgba(10,10,10,0.7)',
-            backdropFilter: 'blur(20px)',
-            WebkitBackdropFilter: 'blur(20px)',
-            borderBottom: '1px solid rgba(255,255,255,0.08)',
-            opacity: bgOpacity,
-            zIndex: -1,
-          }}
-        />
-
         <div className="nav-inner">
           {/* Logo — hidden on desktop since "Navya" is the hero heading */}
           <a href="#hero" className="nav-logo">Navya<span>.</span></a>

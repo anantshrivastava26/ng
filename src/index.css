@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Licorice&display=swap');
+
 /* ═══════════════════════════════════════════════════════════════════════════
    NAVYA GROVER — NOORA PORTFOLIO  |  CSS (React/Framer Motion port)
    ═══════════════════════════════════════════════════════════════════════════ */
@@ -127,27 +129,31 @@ img { display: block; max-width: 100%; }
   font-weight: 600;
   letter-spacing: -0.03em;
   transition: all var(--fast);
-  border: none;
+  border: 1.5px solid #000;
+  background: #000;
+  color: #fff;
 }
 
 .btn-outline {
-  background: var(--surface);
-  color: var(--text);
-  border: 1.5px solid var(--border);
+  background: #000;
+  color: #fff;
+  border-color: #000;
 }
 .btn-outline:hover {
-  background: var(--text);
-  color: var(--surface);
-  border-color: var(--text);
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
 }
 
 .btn-primary {
-  background: var(--surface);
-  color: var(--text);
+  background: #000;
+  color: #fff;
+  border-color: #000;
 }
 .btn-primary:hover {
   background: var(--accent);
   color: #fff;
+  border-color: var(--accent);
 }
 
 /* Section headers */
@@ -234,28 +240,28 @@ img { display: block; max-width: 100%; }
   margin-left: auto;
   display: flex;
   align-items: center;
-  gap: 4px;
-  background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 100px;
-  padding: 5px;
+  gap: 8px;
+  background: transparent;
+  border: none;
+  padding: 0;
 }
 
 .nav-pill-item {
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: -0.02em;
-  color: rgba(255, 255, 255, 0.85);
-  padding: 7px 18px;
+  color: #fff;
+  padding: 8px 18px;
   border-radius: 100px;
   transition: all var(--fast);
   white-space: nowrap;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.24);
 }
 
 .nav-pill-item:hover {
-  background: rgba(255, 255, 255, 0.18);
+  background: var(--accent);
+  border-color: var(--accent);
   color: #fff;
 }
 
@@ -358,6 +364,15 @@ img { display: block; max-width: 100%; }
   -webkit-text-stroke: 1.5px rgba(255,255,255,0.28);
   opacity: 0.34;
   will-change: transform;
+}
+
+.hero-depth-word::after {
+  content: 'PORTFOLIO';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: rgba(255,255,255,0.07);
+  -webkit-text-stroke: 0;
 }
 
 .hero-axis-line {
@@ -475,16 +490,15 @@ img { display: block; max-width: 100%; }
 
 .hero-btn {
   width: fit-content;
-  background: rgba(255,255,255,0.1);
-  border: 1.5px solid rgba(255,255,255,0.3);
+  background: #000;
+  border-color: #000;
   color: #fff;
-  backdrop-filter: blur(8px);
 }
 
 .hero-btn:hover {
-  background: #fff;
-  color: var(--text);
-  border-color: #fff;
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
 }
 
 /* ── Right column ── */
@@ -608,23 +622,6 @@ img { display: block; max-width: 100%; }
   will-change: transform;
 }
 
-.loading-ng-badge {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: clamp(84px, 9vw, 126px);
-  aspect-ratio: 1;
-  z-index: 4;
-  box-shadow: 10px 14px 24px rgba(0,0,0,0.2);
-  will-change: transform, opacity;
-}
-
-.loading-ng-logo {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
 
 /* ── About ──────────────────────────────────────────────────────────────── */
 .about {
@@ -635,149 +632,101 @@ img { display: block; max-width: 100%; }
 .about .container {
   display: flex;
   flex-direction: column;
-  gap: 44px;
+  gap: 28px;
 }
 
 .about-tag {
   align-self: center;
+  background: transparent;
+  border: none;
+  padding: 0;
+  font-size: 30px;
+  font-weight: 600;
+  color: #1a1a1a;
 }
 
-.about-shell {
+.about-tag::before {
+  display: none;
+}
+
+.about-panel {
   display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
-  gap: 32px;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  gap: 42px;
   align-items: center;
 }
 
-.about-content {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.about-kicker {
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-
-.about-heading {
-  font-size: clamp(38px, 5vw, 72px);
-  font-weight: 700;
-  line-height: 0.98;
-  letter-spacing: -0.05em;
-  max-width: 14ch;
-}
-
-.about-heading span {
-  display: block;
-  color: var(--accent);
-}
-
-.about-summary {
-  font-size: clamp(18px, 1.7vw, 24px);
-  font-weight: 500;
-  line-height: 1.45;
-  letter-spacing: -0.03em;
-  color: #2e2e2e;
-  max-width: 40ch;
-}
-
-.about-focus {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  list-style: none;
-}
-
-.about-focus li {
-  border: 1px solid var(--border);
-  background: #fff;
-  border-radius: 999px;
-  padding: 8px 14px;
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-}
-
-.about-cta {
-  width: fit-content;
-}
-
-.about-visual {
+.about-media {
   position: relative;
-  min-height: 640px;
+  min-height: 700px;
   overflow: hidden;
-  border-radius: 32px;
-  display: flex;
-  align-items: flex-end;
-  padding: 24px;
-  background: linear-gradient(145deg, #faf5ff 0%, #f1f1f1 42%, #fff7f4 100%);
+  border-radius: 0;
 }
 
-.about-accent {
+.about-media-accent {
   position: absolute;
-  inset: 36px 40px 76px;
-  border-radius: 28px;
-  background: linear-gradient(165deg, #7e19b0 0%, #e8471b 100%);
-  opacity: 0.14;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 42%;
+  height: 70%;
+  border-radius: 0 52px 52px 0;
+  background: #a66fd1;
 }
 
-.about-image-wrap {
+.about-portrait {
   position: relative;
-  z-index: 1;
-  width: min(100%, 590px);
-  margin-left: 0;
-  border-radius: 24px;
-  overflow: hidden;
-  box-shadow: 0 24px 64px rgba(0,0,0,0.2);
-}
-
-.benefits .section-title {
-  color: var(--accent);
-}
-
-.about-img {
+  z-index: 2;
   width: 100%;
-  height: 640px;
+  height: 100%;
   object-fit: cover;
 }
 
-.about-copy {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 2;
-  padding: 0 48px 36px;
+.about-copy-col {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  pointer-events: none;
+  flex-direction: column;
+  gap: 18px;
+  max-width: 620px;
 }
 
-.about-hello {
-  font-size: clamp(44px, 5.4vw, 80px);
-  font-weight: 700;
-  line-height: 0.95;
+.about-title {
+  font-size: clamp(64px, 8vw, 96px);
+  font-weight: 800;
+  line-height: 0.9;
   letter-spacing: -0.06em;
-  color: #fff;
-  text-shadow: 0 8px 28px rgba(0,0,0,0.28);
+  color: #000;
 }
 
-.about-caption {
-  margin-left: auto;
-  background: rgba(255,255,255,0.86);
-  border: 1px solid rgba(255,255,255,0.9);
-  border-radius: 999px;
-  padding: 9px 14px;
-  font-size: 12px;
+.about-intro-line {
+  font-size: clamp(36px, 4.3vw, 62px);
   font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #202020;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: #111;
+}
+
+.about-name {
+  color: var(--accent);
+}
+
+.about-script {
+  margin-top: -28px;
+  margin-left: clamp(170px, 20vw, 240px);
+  font-family: 'Licorice', cursive;
+  font-size: clamp(54px, 6vw, 88px);
+  line-height: 0.9;
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+.about-bio {
+  margin-top: 10px;
+  font-size: clamp(17px, 1.45vw, 24px);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  color: #111;
+  max-width: 23ch;
 }
 
 /* ── Benefits / Bento Grid ──────────────────────────────────────────────── */
@@ -1378,29 +1327,25 @@ img { display: block; max-width: 100%; }
 @media (max-width: 1024px) {
   :root { --pad-h: 24px; }
 
-  .about-shell {
+  .about-panel {
     grid-template-columns: 1fr;
     gap: 26px;
   }
 
-  .about-heading {
-    max-width: 18ch;
-  }
-
-  .about-visual {
+  .about-media {
     min-height: 560px;
   }
 
-  .about-image-wrap {
-    width: min(100%, 650px);
+  .about-copy-col {
+    max-width: 100%;
   }
 
-  .about-img {
-    height: 560px;
+  .about-script {
+    margin-left: clamp(130px, 28vw, 210px);
   }
 
-  .about-copy {
-    padding: 0 28px 26px;
+  .about-bio {
+    max-width: 30ch;
   }
 
   .bento-grid { grid-template-columns: 1fr 1fr; }
@@ -1447,53 +1392,42 @@ img { display: block; max-width: 100%; }
 
   .loading-outline-depth span { font-size: clamp(52px, 16vw, 110px); }
   .loading-foreground-word { font-size: clamp(58px, 17vw, 130px); }
-  .loading-ng-badge { width: clamp(74px, 16vw, 108px); }
 
-  .about-heading {
-    font-size: clamp(34px, 9vw, 54px);
-    max-width: 16ch;
+  .about-panel {
+    gap: 22px;
   }
 
-  .about-summary {
-    font-size: 18px;
-  }
-
-  .about-focus {
-    gap: 8px;
-  }
-
-  .about-focus li {
-    font-size: 12px;
-    padding: 7px 12px;
-  }
-
-  .about-visual {
+  .about-media {
     min-height: 440px;
-    border-radius: 24px;
-    padding: 16px;
   }
 
-  .about-accent {
-    inset: 24px 20px 44px;
-    border-radius: 22px;
+  .about-media-accent {
+    width: 40%;
+    height: 64%;
+    border-radius: 0 40px 40px 0;
   }
 
-  .about-img {
-    height: 440px;
+  .about-title {
+    font-size: clamp(52px, 14vw, 72px);
   }
 
-  .about-copy {
-    padding: 0 20px 18px;
+  .about-intro-line {
+    font-size: clamp(30px, 10vw, 50px);
   }
 
-  .about-caption {
-    letter-spacing: 0.06em;
-    padding: 7px 11px;
-    font-size: 10px;
+  .about-script {
+    margin-top: -16px;
+    margin-left: clamp(96px, 24vw, 170px);
+    font-size: clamp(44px, 12vw, 72px);
   }
 
-  .about-hello {
-    font-size: clamp(40px, 11vw, 62px);
+  .about-bio {
+    font-size: 18px;
+    max-width: 32ch;
+  }
+
+  .about-tag {
+    font-size: 22px;
   }
 
   .bento-grid { grid-template-columns: 1fr; }
