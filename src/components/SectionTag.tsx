@@ -87,6 +87,18 @@ export function TurnaroundIcon() {
   )
 }
 
+export function WandIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M5 19l10-10" />
+      <path d="M14 6l4 4" />
+      <path d="M16.5 3.5l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8.8-2.2z" />
+      <path d="M8 12l1.2 1.2" />
+      <path d="M10.5 9.5l1.2 1.2" />
+    </svg>
+  )
+}
+
 export default function SectionTag({ label, className = '', icon, align = 'left' }: SectionTagProps) {
   return (
     <motion.div

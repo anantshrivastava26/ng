@@ -27,8 +27,8 @@ export default function Footer() {
               Have a project in mind?
             </motion.h2>
             <motion.a
-              href="mailto:navya@example.com"
-              className="btn btn-primary"
+              href="mailto:grovnavya3003@gmail.com"
+              className="btn btn-primary footer-cta"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-60px' }}

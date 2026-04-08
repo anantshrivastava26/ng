@@ -1,16 +1,18 @@
 import { useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
 
-import SectionTag, { BenefitsIcon, DesignIcon, ThinkingIcon, TurnaroundIcon } from './SectionTag'
+import SectionTag, { BenefitsIcon, DesignIcon, ThinkingIcon, TurnaroundIcon, WandIcon } from './SectionTag'
 
 function BentoCard({
   children,
   className = '',
   delay = 0,
+  glowColor = 'rgba(126,25,176,0.06)',
 }: {
   children: React.ReactNode
   className?: string
   delay?: number
+  glowColor?: string
 }) {
   const [glow, setGlow] = useState({ x: 0, y: 0, active: false })
 
@@ -33,7 +35,7 @@ function BentoCard({
       onMouseLeave={handleMouseLeave}
       style={{
         background: glow.active
-          ? `radial-gradient(circle at ${glow.x}px ${glow.y}px, rgba(126,25,176,0.06) 0%, #fff 60%)`
+          ? `radial-gradient(circle at ${glow.x}px ${glow.y}px, ${glowColor} 0%, #fff 60%)`
           : '#fff',
       }}
     >
@@ -107,30 +109,33 @@ export default function Benefits() {
             </div>
           </BentoCard>
 
-          <BentoCard className="bento-card--center" delay={0.1}>
-            <div className="bento-top">
+          <BentoCard className="bento-card--center" delay={0.1} glowColor="rgba(26,71,42,0.12)">
+            <motion.img
+              src="/assets/logos/hog.jpg"
+              alt="Center visual"
+              className="bento-center-img"
+              animate={{ scale: [1, 1.03, 1] }}
+              transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
+            />
+
+            <div className="bento-top bento-center-content">
               <SectionTag label="Design Thinking" icon={<ThinkingIcon />} className="small" />
               <p className="bento-heading">Developing high fidelity interfaces that balance beauty and usability.</p>
             </div>
-            <div className="bento-phone-wrapper">
+
+            <div className="bento-center-overlay">
               <div className="who-label">Who am I?</div>
-              <div className="phone-mockup">
-                <motion.img
-                  src="https://framerusercontent.com/images/VVk3DTLnb0BfhXcrU889AhfO6w4.png"
-                  alt="Phone mockup"
-                  animate={{ y: [0, -8, 0] }}
-                  transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
-                />
-                <div className="notification-card">
-                  <div className="notif-header">
-                    <div className="notif-left">
-                      <div className="notif-logo" />
-                      <span>WHY DID I CHOOSE DESIGN?</span>
-                    </div>
-                    <span className="notif-time">1m ago</span>
+              <div className="notification-card">
+                <div className="notif-header">
+                  <div className="notif-left">
+                    <span className="notif-logo notif-logo--icon" aria-hidden="true">
+                      <WandIcon />
+                    </span>
+                    <span>WHY DID I CHOOSE DESIGN?</span>
                   </div>
-                  <p>[...] After all this time? Always.</p>
+                  <span className="notif-time">1m ago</span>
                 </div>
+                <p>[...] After all this time? Always.</p>
               </div>
             </div>
           </BentoCard>
@@ -142,8 +147,8 @@ export default function Benefits() {
               className="bento-passion-img"
             />
             <div className="bento-top" style={{ position: 'relative', zIndex: 1 }}>
-              <SectionTag label="Fast turnarounds" icon={<TurnaroundIcon />} className="small tag--muted" />
-              <p className="bento-heading">Passionate about something.</p>
+              <SectionTag label="Personal Favourites" icon={<TurnaroundIcon />} className="small tag--muted" />
+              <p className="bento-heading">Driven by music, and never saying no to petting a dog.</p>
             </div>
             <div className="bento-bottom" style={{ position: 'relative', zIndex: 1 }}>
               <div className="bento-stat-label">Details?</div>
