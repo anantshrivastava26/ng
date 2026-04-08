@@ -4,61 +4,46 @@ import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
   const { scrollY } = useScroll()
-  const bgOpacity = useTransform(scrollY, [0, 60], [0, 0.85])
-  const borderOpacity = useTransform(scrollY, [0, 60], [0, 1])
-  const paddingY = useTransform(scrollY, [0, 60], [20, 12])
+  const bgOpacity = useTransform(scrollY, [0, 80], [0, 1])
 
-  const navLinks = ['About', 'Work', 'Articles']
-
-  const menuVariants = {
-    closed: { opacity: 0, y: -20, pointerEvents: 'none' as const },
-    open: { opacity: 1, y: 0, pointerEvents: 'all' as const },
-  }
-
-  const linkVariants = {
-    closed: { opacity: 0, y: -10 },
-    open: (i: number) => ({ opacity: 1, y: 0, transition: { delay: i * 0.07 } }),
-  }
+  const navLinks = [
+    { label: 'Home', href: '#hero' },
+    { label: 'About', href: '#about' },
+    { label: 'Projects', href: '#projects' },
+    { label: 'Contact', href: '#contact' },
+  ]
 
   return (
     <>
-      <motion.nav
-        className="navbar"
-        style={{ paddingTop: paddingY, paddingBottom: paddingY }}
-      >
+      <motion.nav className="navbar">
+        {/* Scrolled background */}
         <motion.div
           style={{
             position: 'absolute',
             inset: 0,
-            background: 'rgba(241,241,241,1)',
+            background: 'rgba(10,10,10,0.7)',
+            backdropFilter: 'blur(20px)',
+            WebkitBackdropFilter: 'blur(20px)',
+            borderBottom: '1px solid rgba(255,255,255,0.08)',
             opacity: bgOpacity,
-            backdropFilter: 'blur(16px)',
-            WebkitBackdropFilter: 'blur(16px)',
             zIndex: -1,
-          }}
-        />
-        <motion.div
-          style={{
-            position: 'absolute',
-            bottom: 0,
-            left: 0,
-            right: 0,
-            height: 1,
-            background: '#D4D4D4',
-            opacity: borderOpacity,
           }}
         />
 
         <div className="nav-inner">
-          <a href="/" className="nav-logo">Navya<span>.</span></a>
+          {/* Logo — hidden on desktop since "Navya" is the hero heading */}
+          <a href="#hero" className="nav-logo">Navya<span>.</span></a>
 
-          <div className="nav-links">
-            {navLinks.map(link => (
-              <a key={link} href={`#${link.toLowerCase()}`}>{link}</a>
+          {/* Desktop pill nav */}
+          <div className="nav-pill-group">
+            {navLinks.map((link) => (
+              <a key={link.label} href={link.href} className="nav-pill-item">
+                {link.label}
+              </a>
             ))}
-            <a href="#contact" className="nav-cta">Contact</a>
           </div>
 
+          {/* Mobile hamburger */}
           <button
             className="hamburger"
             onClick={() => setMenuOpen(v => !v)}
@@ -77,25 +62,26 @@ export default function Navbar() {
         </div>
       </motion.nav>
 
+      {/* Mobile menu */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
             className="mobile-menu"
-            initial="closed"
-            animate="open"
-            exit="closed"
-            variants={menuVariants}
-            transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
           >
-            {[...navLinks, 'Contact'].map((link, i) => (
+            {navLinks.map((link, i) => (
               <motion.a
-                key={link}
-                href={`#${link.toLowerCase()}`}
-                custom={i}
-                variants={linkVariants}
+                key={link.label}
+                href={link.href}
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.07 }}
                 onClick={() => setMenuOpen(false)}
               >
-                {link}
+                {link.label}
               </motion.a>
             ))}
           </motion.div>

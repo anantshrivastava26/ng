@@ -2,7 +2,7 @@ import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 28 },
+  hidden: { opacity: 0, y: 32 },
   visible: (delay = 0) => ({
     opacity: 1,
     y: 0,
@@ -13,10 +13,11 @@ const fadeUp = {
 export default function Hero() {
   const heroRef = useRef<HTMLElement>(null)
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] })
-  const bgY = useTransform(scrollYProgress, [0, 1], ['0%', '35%'])
+  const bgY = useTransform(scrollYProgress, [0, 1], ['0%', '30%'])
 
   return (
     <section className="hero" id="hero" ref={heroRef}>
+      {/* ── Background ── */}
       <div className="hero-bg">
         <motion.img
           src="https://framerusercontent.com/images/PkcMje8K9abiM4x9FIaeR5h65Y.png"
@@ -30,26 +31,46 @@ export default function Hero() {
         <div className="hero-overlay" />
       </div>
 
+      {/* ── Content grid ── */}
       <div className="hero-content">
+
+        {/* Left col: display name (top) + tagline/CTA (bottom) */}
         <div className="hero-left">
-          <div className="hero-text-main">
-            <motion.p
-              className="hero-tagline"
-              initial="hidden"
-              animate="visible"
-              custom={0}
-              variants={fadeUp}
+
+          {/* Big display name */}
+          <div className="hero-name-block">
+            <motion.h1
+              className="hero-display-name"
+              initial="hidden" animate="visible" custom={0} variants={fadeUp}
             >
-              Designing experiences that feel as good as they function
+              Navya
+            </motion.h1>
+            <motion.p
+              className="hero-display-sub"
+              initial="hidden" animate="visible" custom={140} variants={fadeUp}
+            >
+              Great begins here.
             </motion.p>
+          </div>
+
+          {/* Tagline + CTA pushed to bottom */}
+          <div className="hero-text-main">
+            <motion.div
+              className="hero-tagline-block"
+              initial="hidden" animate="visible" custom={260} variants={fadeUp}
+            >
+              <p className="hero-tagline">
+                Designing experiences that feel as good as they function
+              </p>
+              <p className="hero-tagline-sub">
+                Turning insights into intuitive interactions
+              </p>
+            </motion.div>
             <motion.a
               href="#contact"
               className="btn btn-outline hero-btn"
-              initial="hidden"
-              animate="visible"
-              custom={200}
-              variants={fadeUp}
-              whileHover={{ scale: 1.03 }}
+              initial="hidden" animate="visible" custom={380} variants={fadeUp}
+              whileHover={{ scale: 1.04, transition: { duration: 0.2 } }}
               whileTap={{ scale: 0.97 }}
             >
               Resume ↗
@@ -57,23 +78,18 @@ export default function Hero() {
           </div>
         </div>
 
+        {/* Right col: title + featured card, aligned to bottom */}
         <div className="hero-right">
           <motion.h2
             className="hero-title"
-            initial="hidden"
-            animate="visible"
-            custom={100}
-            variants={fadeUp}
+            initial="hidden" animate="visible" custom={160} variants={fadeUp}
           >
-            UI/UX &amp; Product Design
+            UI/UX &amp;<br />Product Design
           </motion.h2>
           <motion.div
             className="hero-card"
-            initial="hidden"
-            animate="visible"
-            custom={300}
-            variants={fadeUp}
-            whileHover={{ scale: 1.02, transition: { duration: 0.3 } }}
+            initial="hidden" animate="visible" custom={320} variants={fadeUp}
+            whileHover={{ scale: 1.025, transition: { duration: 0.3 } }}
           >
             <div className="hero-card-inner">
               <div className="hero-card-label">Featured Project</div>
@@ -84,11 +100,12 @@ export default function Hero() {
         </div>
       </div>
 
+      {/* Scroll indicator */}
       <motion.div
         className="hero-scroll"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.2, duration: 0.8 }}
+        transition={{ delay: 1.4, duration: 0.8 }}
       >
         <motion.div
           animate={{ y: [0, 6, 0] }}
