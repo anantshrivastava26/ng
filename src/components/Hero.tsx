@@ -1,15 +1,6 @@
 import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 32 },
-  visible: (delay = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 1.45, ease: [0.22, 1, 0.36, 1] as const, delay: delay / 1000 },
-  }),
-}
-
 const heroSequence = {
   hidden: {},
   visible: {
@@ -30,7 +21,11 @@ const heroItem = {
   },
 }
 
-export default function Hero() {
+type HeroProps = {
+  startReveal: boolean
+}
+
+export default function Hero({ startReveal }: HeroProps) {
   const heroRef = useRef<HTMLElement>(null)
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] })
   const bgY = useTransform(scrollYProgress, [0, 1], ['0%', '42%'])
@@ -43,6 +38,8 @@ export default function Hero() {
           src="/assets/logos/hero.png"
           alt="Background"
           className="hero-bg-img"
+          loading="eager"
+          fetchPriority="high"
           style={{ y: bgY }}
           initial={{ scale: 1.18 }}
           animate={{ scale: 1.08 }}
@@ -82,7 +79,12 @@ export default function Hero() {
       </div>
 
       {/* ── Content grid ── */}
-      <motion.div className="hero-content" initial="hidden" animate="visible" variants={heroSequence}>
+      <motion.div
+        className="hero-content"
+        initial="hidden"
+        animate={startReveal ? 'visible' : 'hidden'}
+        variants={heroSequence}
+      >
 
         {/* Left col: display name (top) + tagline/CTA (bottom) */}
         <motion.div className="hero-left" variants={heroSequence}>
@@ -137,8 +139,8 @@ export default function Hero() {
       <motion.div
         className="hero-scroll"
         initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2.1, duration: 1.0 }}
+        animate={{ opacity: startReveal ? 1 : 0 }}
+        transition={{ delay: startReveal ? 2.1 : 0, duration: 1.0 }}
       >
         <motion.div
           animate={{ y: [0, 6, 0] }}

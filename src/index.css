@@ -1555,7 +1555,7 @@ img { display: block; max-width: 100%; }
 
 /* ── Custom Cursor ──────────────────────────────────────────────────────── */
 @media (pointer: fine) {
-  * { cursor: none; }
+  body.cursor-ready * { cursor: none; }
 
   .cursor {
     position: fixed;
