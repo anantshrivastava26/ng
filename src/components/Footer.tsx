@@ -1,6 +1,14 @@
 import { motion } from 'framer-motion'
 
-const links = ['LinkedIn', 'Dribbble', 'Behance', 'Resume']
+const LINKEDIN_URL = 'https://www.linkedin.com/in/navyagrover/'
+const BEHANCE_URL = 'https://www.behance.net/navyagrover5'
+
+const links = [
+  { label: 'LinkedIn', href: LINKEDIN_URL, external: true },
+  { label: 'Gmail', href: 'mailto:grovnavya@gmail.com', external: false },
+  { label: 'Behance', href: BEHANCE_URL, external: true },
+  { label: 'Resume', href: '#', external: false },
+]
 
 export default function Footer() {
   return (
@@ -15,7 +23,7 @@ export default function Footer() {
               viewport={{ once: true, margin: '-60px' }}
               transition={{ duration: 0.6 }}
             >
-              Let's connect
+              Contact
             </motion.p>
             <motion.h2
               className="footer-heading"
@@ -24,19 +32,18 @@ export default function Footer() {
               viewport={{ once: true, margin: '-60px' }}
               transition={{ duration: 0.8, delay: 0.1 }}
             >
-              Have a project in mind?
+              Let's connect
             </motion.h2>
             <motion.a
-              href="mailto:grovnavya3003@gmail.com"
-              className="btn btn-primary footer-cta"
+              href="tel:+919931982799"
+              className="footer-phone"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-60px' }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.96 }}
+              whileHover={{ opacity: 1 }}
             >
-              Get in touch ↗
+              +91 99319 82799
             </motion.a>
           </div>
 
@@ -44,15 +51,17 @@ export default function Footer() {
             <div className="footer-links">
               {links.map((link, i) => (
                 <motion.a
-                  key={link}
-                  href="#"
+                  key={link.label}
+                  href={link.href}
+                  target={link.external ? '_blank' : undefined}
+                  rel={link.external ? 'noreferrer' : undefined}
                   initial={{ opacity: 0, x: 20 }}
                   whileInView={{ opacity: 0.6, x: 0 }}
                   viewport={{ once: true, margin: '-60px' }}
                   transition={{ duration: 0.5, delay: i * 0.08 }}
                   whileHover={{ opacity: 1 }}
                 >
-                  {link} ↗
+                  {link.label} ↗
                 </motion.a>
               ))}
             </div>

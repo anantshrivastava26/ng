@@ -36,10 +36,11 @@ export default function Hero() {
           />
           <motion.div
             className="hero-depth-word"
+            style={{ scaleY: 2 }}
             animate={{ scale: [1, 1.03, 1] }}
             transition={{ duration: 16, repeat: Infinity, ease: 'easeInOut' }}
           >
-            Driven by curiosity
+            DRIVEN BY CURIOSITY
           </motion.div>
           <motion.div
             className="hero-swiss-grid"
@@ -74,12 +75,6 @@ export default function Hero() {
             >
               Navya
             </motion.h1>
-            <motion.p
-              className="hero-display-sub"
-              initial="hidden" animate="visible" custom={140} variants={fadeUp}
-            >
-              Great begins here.
-            </motion.p>
           </div>
 
           {/* Tagline + CTA pushed to bottom */}
