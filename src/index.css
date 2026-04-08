@@ -158,6 +158,12 @@ img { display: block; max-width: 100%; }
   margin-bottom: 80px;
 }
 
+.section-header > .section-tag {
+  justify-self: start;
+  align-self: start;
+  width: fit-content;
+}
+
 .section-title-col {
   display: flex;
   flex-direction: column;
@@ -519,91 +525,145 @@ img { display: block; max-width: 100%; }
 .about .container {
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 44px;
 }
 
 .about-tag {
   align-self: center;
 }
 
-.about-hero {
+.about-shell {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 0;
-  align-items: stretch;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  gap: 32px;
+  align-items: center;
 }
 
-.about-visual {
-  position: relative;
-  min-height: 750px;
-  overflow: hidden;
-  border-radius: 28px;
+.about-content {
   display: flex;
-  align-items: stretch;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.about-accent {
-  position: absolute;
-  inset: 60px 16% 60px 30%;
-  border-radius: 56px;
-  background: #B06ED5;
+.about-kicker {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
 }
 
-.about-img {
-  position: relative;
-  z-index: 1;
-  width: 86%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 20px 0 0 20px;
-  box-shadow: 0 22px 60px rgba(0,0,0,0.18);
-}
-
-.about-copy {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-}
-
-.about-hello {
-  position: absolute;
-  top: 22%;
-  left: 44.5%;
-  font-size: clamp(58px, 6vw, 100px);
+.about-heading {
+  font-size: clamp(38px, 5vw, 72px);
   font-weight: 700;
-  line-height: 0.95;
-  letter-spacing: -0.06em;
-}
-
-.about-intro {
-  font-size: clamp(28px, 3vw, 48px);
-  font-weight: 700;
-  line-height: 1.05;
+  line-height: 0.98;
   letter-spacing: -0.05em;
+  max-width: 14ch;
 }
 
-.about-name {
-  color: var(--accent);
-}
-
-.about-role {
-  margin-top: -4px;
-  font-size: clamp(24px, 2.5vw, 40px);
-  font-weight: 500;
-  font-style: italic;
-  letter-spacing: -0.04em;
+.about-heading span {
+  display: block;
   color: var(--accent);
 }
 
 .about-summary {
-  position: absolute;
-  top: 60%;
-  left: 45.5%;
-  font-size: clamp(18px, 1.8vw, 28px);
+  font-size: clamp(18px, 1.7vw, 24px);
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: -0.03em;
+  color: #2e2e2e;
+  max-width: 40ch;
+}
+
+.about-focus {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  list-style: none;
+}
+
+.about-focus li {
+  border: 1px solid var(--border);
+  background: #fff;
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: 13px;
   font-weight: 600;
-  line-height: 1.25;
-  letter-spacing: -0.05em;
-  max-width: 520px;
+  letter-spacing: -0.02em;
+}
+
+.about-cta {
+  width: fit-content;
+}
+
+.about-visual {
+  position: relative;
+  min-height: 640px;
+  overflow: hidden;
+  border-radius: 32px;
+  display: flex;
+  align-items: flex-end;
+  padding: 24px;
+  background: linear-gradient(145deg, #faf5ff 0%, #f1f1f1 42%, #fff7f4 100%);
+}
+
+.about-accent {
+  position: absolute;
+  inset: 36px 40px 76px;
+  border-radius: 28px;
+  background: linear-gradient(165deg, #7e19b0 0%, #e8471b 100%);
+  opacity: 0.14;
+}
+
+.about-image-wrap {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 590px);
+  margin-left: auto;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.2);
+}
+
+.about-img {
+  width: 100%;
+  height: 640px;
+  object-fit: cover;
+}
+
+.about-copy {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  padding: 0 48px 36px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  pointer-events: none;
+}
+
+.about-hello {
+  font-size: clamp(44px, 5.4vw, 80px);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.06em;
+  color: #fff;
+  text-shadow: 0 8px 28px rgba(0,0,0,0.28);
+}
+
+.about-caption {
+  margin-left: auto;
+  background: rgba(255,255,255,0.86);
+  border: 1px solid rgba(255,255,255,0.9);
+  border-radius: 999px;
+  padding: 9px 14px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #202020;
 }
 
 /* ── Benefits / Bento Grid ──────────────────────────────────────────────── */
@@ -1177,11 +1237,30 @@ img { display: block; max-width: 100%; }
 @media (max-width: 1024px) {
   :root { --pad-h: 24px; }
 
-  .about-visual { min-height: 600px; }
-  .about-img { width: 88%; }
-  .about-accent { inset: 48px 14% 48px 28%; }
-  .about-hello { top: 20%; left: 54%; }
-  .about-summary { top: 43%; left: 54%; max-width: 360px; }
+  .about-shell {
+    grid-template-columns: 1fr;
+    gap: 26px;
+  }
+
+  .about-heading {
+    max-width: 18ch;
+  }
+
+  .about-visual {
+    min-height: 560px;
+  }
+
+  .about-image-wrap {
+    width: min(100%, 650px);
+  }
+
+  .about-img {
+    height: 560px;
+  }
+
+  .about-copy {
+    padding: 0 28px 26px;
+  }
 
   .bento-grid { grid-template-columns: 1fr 1fr; }
   .bento-card:last-child { grid-column: 1 / -1; }
@@ -1221,13 +1300,52 @@ img { display: block; max-width: 100%; }
   .hero-card { width: 100%; height: 200px; }
   .hero-title { text-align: left; font-size: 28px; }
 
-  .about-visual { min-height: 420px; }
-  .about-accent { inset: 40px 0 40px 34%; border-radius: 36px; }
-  .about-img { width: 82%; }
-  .about-hello { top: 18%; left: 52%; font-size: clamp(48px, 12vw, 72px); }
-  .about-intro { font-size: clamp(24px, 6vw, 34px); }
-  .about-role { font-size: clamp(20px, 5vw, 28px); }
-  .about-summary { top: 40%; left: 52%; font-size: 18px; max-width: 300px; }
+  .about-heading {
+    font-size: clamp(34px, 9vw, 54px);
+    max-width: 16ch;
+  }
+
+  .about-summary {
+    font-size: 18px;
+  }
+
+  .about-focus {
+    gap: 8px;
+  }
+
+  .about-focus li {
+    font-size: 12px;
+    padding: 7px 12px;
+  }
+
+  .about-visual {
+    min-height: 440px;
+    border-radius: 24px;
+    padding: 16px;
+  }
+
+  .about-accent {
+    inset: 24px 20px 44px;
+    border-radius: 22px;
+  }
+
+  .about-img {
+    height: 440px;
+  }
+
+  .about-copy {
+    padding: 0 20px 18px;
+  }
+
+  .about-caption {
+    letter-spacing: 0.06em;
+    padding: 7px 11px;
+    font-size: 10px;
+  }
+
+  .about-hello {
+    font-size: clamp(40px, 11vw, 62px);
+  }
 
   .bento-grid { grid-template-columns: 1fr; }
   .bento-card:last-child { grid-column: auto; }
