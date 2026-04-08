@@ -27,18 +27,22 @@ export default function App() {
       <AnimatePresence onExitComplete={() => setShowContent(true)}>
         {showLoader && <LoadingScreen />}
       </AnimatePresence>
-      {showContent && (
-        <>
-          <Cursor />
-          <ScrollProgress />
-          <Navbar />
-          <main>
-            <Hero />
+      <Cursor />
+      <main>
+        <Hero startReveal={showContent} />
+        {showContent && (
+          <>
             <About />
             <Benefits />
             <Projects />
             <Methodology />
-          </main>
+          </>
+        )}
+      </main>
+      {showContent && (
+        <>
+          <ScrollProgress />
+          <Navbar />
           <Footer />
         </>
       )}

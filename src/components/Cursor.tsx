@@ -14,9 +14,16 @@ export default function Cursor() {
   const ringY = useSpring(mouseY, { stiffness: 500, damping: 40, restDelta: 0.001 })
 
   useEffect(() => {
+    const body = document.body
+
     // Only show on fine pointer devices
-    if (!window.matchMedia('(pointer: fine)').matches) return
+    if (!window.matchMedia('(pointer: fine)').matches) {
+      body.classList.remove('cursor-ready')
+      return
+    }
+
     setMounted(true)
+    body.classList.add('cursor-ready')
 
     const onMove = (e: MouseEvent) => {
       const el = document.elementFromPoint(e.clientX, e.clientY) as HTMLElement | null
@@ -31,6 +38,7 @@ export default function Cursor() {
 
     return () => {
       window.removeEventListener('mousemove', onMove)
+      body.classList.remove('cursor-ready')
     }
   }, [mouseX, mouseY])
 
