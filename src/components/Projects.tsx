@@ -1,6 +1,8 @@
 import { useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 
+import SectionTag, { WorkIcon } from './SectionTag'
+
 interface Project {
   name: string
   desc: string
@@ -96,15 +98,7 @@ export default function Projects() {
 
       <div className="container">
         <div className="section-header">
-          <motion.div
-            className="tag"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.6 }}
-          >
-            Work
-          </motion.div>
+          <SectionTag label="Work" icon={<WorkIcon />} />
           <div className="section-title-col">
             <motion.h2
               className="section-title display"

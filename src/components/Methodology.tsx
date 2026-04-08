@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion'
 
+import SectionTag, { MethodologyIcon } from './SectionTag'
+
 const tools = [
   'Figma', 'Adobe Photoshop', 'Adobe Illustrator',
   'Adobe InDesign', 'AutoCAD', '3Ds Max', 'Blender', 'Framer',
@@ -35,15 +37,7 @@ export default function Methodology() {
 
       <div className="container">
         <div className="section-header">
-          <motion.div
-            className="tag tag--light"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.6 }}
-          >
-            Methodology
-          </motion.div>
+          <SectionTag label="Methodology" icon={<MethodologyIcon />} className="tag--light" />
           <div className="section-title-col">
             <motion.h2
               className="section-title light"

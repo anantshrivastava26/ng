@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion'
 
+import SectionTag, { InsightsIcon } from './SectionTag'
+
 const BASE = 'https://framerusercontent.com/images/'
 
 const articles = [
@@ -22,15 +24,7 @@ export default function Articles() {
     <section className="section articles" id="articles">
       <div className="container">
         <div className="section-header">
-          <motion.div
-            className="tag"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.6 }}
-          >
-            Insights
-          </motion.div>
+          <SectionTag label="Insights" icon={<InsightsIcon />} />
           <div className="section-title-col">
             <motion.h2
               className="section-title"

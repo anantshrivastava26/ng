@@ -19,32 +19,18 @@ export default function Cursor() {
     setMounted(true)
 
     const onMove = (e: MouseEvent) => {
+      const el = document.elementFromPoint(e.clientX, e.clientY) as HTMLElement | null
+
       mouseX.set(e.clientX)
       mouseY.set(e.clientY)
-    }
 
-    const onOver = (e: MouseEvent) => {
-      const el = e.target as HTMLElement
-      if (el.closest('a, button, .project-tile, .bento-card, .tool-item')) {
-        setIsHovering(true)
-      }
-    }
-
-    const onOut = (e: MouseEvent) => {
-      const el = e.target as HTMLElement
-      if (el.closest('a, button, .project-tile, .bento-card, .tool-item')) {
-        setIsHovering(false)
-      }
+      setIsHovering(Boolean(el?.closest('a, button, .project-tile, .bento-card, .tool-item')))
     }
 
     window.addEventListener('mousemove', onMove)
-    document.addEventListener('mouseover', onOver)
-    document.addEventListener('mouseout', onOut)
 
     return () => {
       window.removeEventListener('mousemove', onMove)
-      document.removeEventListener('mouseover', onOver)
-      document.removeEventListener('mouseout', onOut)
     }
   }, [mouseX, mouseY])
 
@@ -62,7 +48,7 @@ export default function Cursor() {
         animate={{
           width: isHovering ? 56 : 36,
           height: isHovering ? 56 : 36,
-          borderColor: isHovering ? '#7E19B0' : 'rgba(0,0,0,0.35)',
+          borderColor: '#fff',
         }}
         transition={{ type: 'spring', stiffness: 300, damping: 25 }}
       />
