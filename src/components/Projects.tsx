@@ -42,6 +42,8 @@ interface Project {
 
 const BASE = 'https://framerusercontent.com/images/'
 const BEHANCE_PROFILE = 'https://www.behance.net/navyagrover5'
+const SAANJH_PROJECT = 'https://www.behance.net/gallery/247285389/Saanjh-A-Digital-Experience-for-Craft-Led-Lighting'
+const PAWZO_PROJECT = 'https://www.behance.net/gallery/247289205/Pawzo-A-Pet-Stay-App'
 const NEUROVISOR_PROJECT = 'https://www.behance.net/gallery/246681547/NEUROVISOR-X-A-Futuristic-Smart-Helmet'
 
 const projects: Project[] = [
@@ -50,14 +52,14 @@ const projects: Project[] = [
     desc: 'A Digital Experience for Craft-Led Lighting',
     tags: ['Product Design', 'UI Design'],
     image: `${BASE}hIMdQAU8hOgi8GFT4vPLwwAILz0.png`,
-    link: BEHANCE_PROFILE,
+    link: SAANJH_PROJECT,
   },
   {
     name: 'Pawzo',
     desc: 'A trusted stay platform for pet owners',
     tags: ['UX Design', 'Interface Design'],
     image: `${BASE}n4liRTOFULOzrRSiz5FpMfnQdhM.png`,
-    link: BEHANCE_PROFILE,
+    link: PAWZO_PROJECT,
     offset: true,
   },
   {
@@ -120,7 +122,7 @@ function ProjectTile({ project, index }: { project: Project; index: number }) {
           rel="noreferrer"
           whileHover={{ gap: '8px' }}
         >
-          View Projects ↗
+          View Project ↗
         </motion.a>
       </div>
     </motion.div>
