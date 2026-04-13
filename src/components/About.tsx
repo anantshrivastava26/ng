@@ -97,7 +97,7 @@ export default function About() {
               initial="hidden"
               animate={isInView ? 'visible' : 'hidden'}
             >
-              {aboutPills.map((pill, index) => (
+              {aboutPills.map((pill) => (
                 <motion.span key={pill} className="about-pill" variants={pillVariants}>
                   {pill}
                 </motion.span>

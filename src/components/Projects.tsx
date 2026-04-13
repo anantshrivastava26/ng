@@ -48,6 +48,8 @@ const PAWZO_PROJECT = 'https://www.behance.net/gallery/247289205/Pawzo-A-Pet-Sta
 const NEUROVISOR_PROJECT = 'https://www.behance.net/gallery/246681547/NEUROVISOR-X-A-Futuristic-Smart-Helmet'
 const TREND_FORECASTING_PDF = '/misc/trend%20forecasting.pdf'
 const TREND_FORECASTING_COVER = '/misc/cover.png'
+const COFFEE_TABLE_BOOK_PDF = '/misc/coffee%20table%20book.pdf'
+const COFFEE_TABLE_BOOK_COVER = '/misc/coverrr.png'
 
 const projects: Project[] = [
   {
@@ -83,6 +85,15 @@ const miscellaneousProjects: Project[] = [
     link: TREND_FORECASTING_PDF,
     downloadFileName: 'trend forecasting.pdf',
     imagePosition: '0% center',
+  },
+  {
+    name: 'Coffee Table Book',
+    desc: 'A curated visual narrative exploring form, mood, and storytelling through editorial-style layouts.',
+    tags: ['Editorial', 'Visual Design'],
+    image: COFFEE_TABLE_BOOK_COVER,
+    link: COFFEE_TABLE_BOOK_PDF,
+    downloadFileName: 'coffee table book.pdf',
+    imagePosition: 'center center',
   },
 ]
 
