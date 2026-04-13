@@ -59,7 +59,7 @@ export default function Hero({ startReveal }: HeroProps) {
             animate={{ scale: [1, 1.03, 1] }}
             transition={{ duration: 16, repeat: Infinity, ease: 'easeInOut' }}
           >
-            DRIVEN BY CURIOSITY
+            PORTFOLIO
           </motion.div>
           <motion.div
             className="hero-swiss-grid"

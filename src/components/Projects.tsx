@@ -1,5 +1,5 @@
-import { useRef, useState } from 'react'
-import { motion } from 'framer-motion'
+import { useEffect, useRef, useState } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
 
 import SectionTag, { WorkIcon } from './SectionTag'
 
@@ -38,13 +38,16 @@ interface Project {
   image: string
   link: string
   offset?: boolean
+  downloadFileName?: string
+  imagePosition?: string
 }
 
 const BASE = 'https://framerusercontent.com/images/'
-const BEHANCE_PROFILE = 'https://www.behance.net/navyagrover5'
 const SAANJH_PROJECT = 'https://www.behance.net/gallery/247285389/Saanjh-A-Digital-Experience-for-Craft-Led-Lighting'
 const PAWZO_PROJECT = 'https://www.behance.net/gallery/247289205/Pawzo-A-Pet-Stay-App'
 const NEUROVISOR_PROJECT = 'https://www.behance.net/gallery/246681547/NEUROVISOR-X-A-Futuristic-Smart-Helmet'
+const TREND_FORECASTING_PDF = '/misc/trend%20forecasting.pdf'
+const TREND_FORECASTING_COVER = '/misc/cover.png'
 
 const projects: Project[] = [
   {
@@ -71,6 +74,18 @@ const projects: Project[] = [
   },
 ]
 
+const miscellaneousProjects: Project[] = [
+  {
+    name: 'Trend Forecasting',
+    desc: 'Lifestyle and design trend study with insights, material signals, and future-facing direction.',
+    tags: ['Research', 'Forecasting'],
+    image: TREND_FORECASTING_COVER,
+    link: TREND_FORECASTING_PDF,
+    downloadFileName: 'trend forecasting.pdf',
+    imagePosition: '0% center',
+  },
+]
+
 function ProjectTile({ project, index }: { project: Project; index: number }) {
   const imgRef = useRef<HTMLDivElement>(null)
   const [tilt, setTilt] = useState({ x: 0, y: 0 })
@@ -94,35 +109,50 @@ function ProjectTile({ project, index }: { project: Project; index: number }) {
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
-      <motion.div
-        ref={imgRef}
-        className="project-tile-img"
-        style={{
-          rotateY: tilt.x,
-          rotateX: tilt.y,
-          transformPerspective: 800,
-        }}
-        transition={{ type: 'spring', stiffness: 200, damping: 25 }}
-        whileHover={{ scale: 0.97 }}
+      <a
+        href={project.link}
+        className="project-tile-image-link"
+        download={project.downloadFileName}
+        target={project.downloadFileName ? undefined : '_blank'}
+        rel={project.downloadFileName ? undefined : 'noreferrer'}
+        aria-label={`Open ${project.name} project`}
       >
-        <img src={project.image} alt={project.name} className="project-tile-photo" />
-        <div className="project-tags">
-          {project.tags.map((tag) => (
-            <span key={tag} className="project-tag">{tag}</span>
-          ))}
-        </div>
-      </motion.div>
+        <motion.div
+          ref={imgRef}
+          className="project-tile-img"
+          style={{
+            rotateY: tilt.x,
+            rotateX: tilt.y,
+            transformPerspective: 800,
+          }}
+          transition={{ type: 'spring', stiffness: 200, damping: 25 }}
+          whileHover={{ scale: 0.97 }}
+        >
+          <img
+            src={project.image}
+            alt={project.name}
+            className="project-tile-photo"
+            style={project.imagePosition ? { objectPosition: project.imagePosition } : undefined}
+          />
+          <div className="project-tags">
+            {project.tags.map((tag) => (
+              <span key={tag} className="project-tag">{tag}</span>
+            ))}
+          </div>
+        </motion.div>
+      </a>
       <div className="project-tile-info">
         <h3>{project.name}</h3>
         <p>{project.desc}</p>
         <motion.a
           href={project.link}
           className="project-link"
-          target="_blank"
-          rel="noreferrer"
+          download={project.downloadFileName}
+          target={project.downloadFileName ? undefined : '_blank'}
+          rel={project.downloadFileName ? undefined : 'noreferrer'}
           whileHover={{ gap: '8px' }}
         >
-          View Project ↗
+          {project.downloadFileName ? 'Download Project ↓' : 'View Project ↗'}
         </motion.a>
       </div>
     </motion.div>
@@ -130,7 +160,34 @@ function ProjectTile({ project, index }: { project: Project; index: number }) {
 }
 
 export default function Projects() {
+  const [isProjectsModalOpen, setProjectsModalOpen] = useState(false)
+
+  useEffect(() => {
+    if (!isProjectsModalOpen) return undefined
+
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+
+    return () => {
+      document.body.style.overflow = previousOverflow
+    }
+  }, [isProjectsModalOpen])
+
+  useEffect(() => {
+    if (!isProjectsModalOpen) return undefined
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setProjectsModalOpen(false)
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [isProjectsModalOpen])
+
   return (
+    <>
     <section className="section projects" id="projects">
       <div className="bg-lines" aria-hidden="true">
         <div className="bg-line" />
@@ -184,11 +241,10 @@ export default function Projects() {
                 </motion.span>
               ))}
             </motion.p>
-            <motion.a
-              href={BEHANCE_PROFILE}
+            <motion.button
+              type="button"
               className="btn btn-outline projects-cta"
-              target="_blank"
-              rel="noreferrer"
+              onClick={() => setProjectsModalOpen(true)}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-60px' }}
@@ -196,8 +252,8 @@ export default function Projects() {
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
             >
-              View projects →
-            </motion.a>
+              View all miscellaneous projects →
+            </motion.button>
           </div>
         </div>
 
@@ -208,5 +264,46 @@ export default function Projects() {
         </div>
       </div>
     </section>
+    <AnimatePresence>
+      {isProjectsModalOpen && (
+        <motion.div
+          className="projects-modal-backdrop"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.25 }}
+          onClick={() => setProjectsModalOpen(false)}
+        >
+          <motion.div
+            className="projects-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="projects-modal-title"
+            initial={{ opacity: 0, y: 28, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.98 }}
+            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className="projects-modal-head">
+              <h3 id="projects-modal-title">All Miscellaneous Projects</h3>
+              <div className="projects-modal-actions">
+                <button type="button" onClick={() => setProjectsModalOpen(false)}>
+                  Close
+                </button>
+              </div>
+            </div>
+            <div className="projects-modal-body">
+              <div className="projects-grid projects-grid--modal">
+                {miscellaneousProjects.map((project, i) => (
+                  <ProjectTile key={`modal-${project.name}`} project={project} index={i} />
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+    </>
   )
 }

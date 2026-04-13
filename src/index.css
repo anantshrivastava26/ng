@@ -373,7 +373,7 @@ img { display: block; max-width: 100%; }
 }
 
 .hero-depth-word::after {
-  content: 'DRIVEN BY CURIOSITY';
+  content: 'PORTFOLIO';
   position: absolute;
   left: 0;
   top: 0;
@@ -1066,6 +1066,11 @@ img { display: block; max-width: 100%; }
 
 .project-tile--mid { margin-top: 60px; }
 
+.project-tile-image-link {
+  display: block;
+  border-radius: 16px;
+}
+
 .project-tile-img {
   width: 100%;
   aspect-ratio: 3/4;
@@ -1143,6 +1148,89 @@ img { display: block; max-width: 100%; }
 }
 
 .project-link:hover { gap: 8px; }
+
+.projects-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 10, 10, 0.62);
+  backdrop-filter: blur(8px);
+  z-index: 130;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.projects-modal {
+  width: min(1200px, 100%);
+  max-height: calc(100vh - 48px);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.22);
+}
+
+.projects-modal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--border);
+  background: #f7f7f7;
+}
+
+.projects-modal-head h3 {
+  font-size: clamp(22px, 2.6vw, 34px);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--accent);
+}
+
+.projects-modal-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.projects-modal-actions a,
+.projects-modal-actions button {
+  border-radius: 999px;
+  border: 1px solid #000;
+  background: #000;
+  color: #fff;
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.projects-modal-actions button {
+  cursor: pointer;
+}
+
+.projects-modal-actions a:hover,
+.projects-modal-actions button:hover {
+  border-color: var(--accent);
+  background: var(--accent);
+}
+
+.projects-modal-body {
+  overflow-y: auto;
+  padding: 20px;
+}
+
+.projects-grid--modal {
+  margin-top: 0;
+  gap: 16px;
+}
+
+.projects-grid--modal .project-tile--mid {
+  margin-top: 0;
+}
 
 /* ── Methodology / Tools ────────────────────────────────────────────────── */
 .methodology {
@@ -1459,6 +1547,7 @@ img { display: block; max-width: 100%; }
 
   .projects-grid { gap: 8px; }
   .project-tile--mid { margin-top: 32px; }
+  .projects-grid--modal { grid-template-columns: repeat(2, 1fr); }
 
   .methodology .section-header,
   .section-header { grid-template-columns: 1fr; gap: 24px; }
@@ -1541,6 +1630,21 @@ img { display: block; max-width: 100%; }
 
   .projects-grid { grid-template-columns: 1fr; gap: 32px; }
   .project-tile--mid { margin-top: 0; }
+  .projects-modal-backdrop { padding: 14px; }
+  .projects-modal { max-height: calc(100vh - 28px); }
+  .projects-modal-head {
+    padding: 14px;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .projects-modal-actions { width: 100%; }
+  .projects-modal-actions a,
+  .projects-modal-actions button {
+    flex: 1;
+    text-align: center;
+  }
+  .projects-modal-body { padding: 14px; }
+  .projects-grid--modal { grid-template-columns: 1fr; gap: 24px; }
 
   .logo-grid { grid-template-columns: repeat(2, 1fr); }
 
