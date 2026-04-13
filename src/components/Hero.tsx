@@ -25,6 +25,8 @@ type HeroProps = {
   startReveal: boolean
 }
 
+const RESUME_IMAGE_URL = '/resume.png'
+
 export default function Hero({ startReveal }: HeroProps) {
   const heroRef = useRef<HTMLElement>(null)
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] })
@@ -41,8 +43,8 @@ export default function Hero({ startReveal }: HeroProps) {
           loading="eager"
           fetchPriority="high"
           style={{ y: bgY }}
-          initial={{ scale: 1.18 }}
-          animate={{ scale: 1.08 }}
+          initial={{ scale: 1.1 }}
+          animate={{ scale: 1.04 }}
           transition={{ duration: 14, ease: [0.25, 0.46, 0.45, 0.94] }}
         />
         <div className="hero-motion-layer" aria-hidden>
@@ -53,11 +55,9 @@ export default function Hero({ startReveal }: HeroProps) {
           />
           <motion.div
             className="hero-depth-word"
-            style={{ scaleY: 2 }}
-            animate={{ scale: [1, 1.03, 1] }}
-            transition={{ duration: 16, repeat: Infinity, ease: 'easeInOut' }}
+            style={{ scaleY: 1 }}
           >
-            DRIVEN BY CURIOSITY
+            PORTFOLIO
           </motion.div>
           <motion.div
             className="hero-swiss-grid"
@@ -113,7 +113,8 @@ export default function Hero({ startReveal }: HeroProps) {
               </p>
             </motion.div>
             <motion.a
-              href="#contact"
+              href={RESUME_IMAGE_URL}
+              download="resume.png"
               className="btn btn-outline hero-btn"
               variants={heroItem}
               whileHover={{ scale: 1.04, transition: { duration: 0.2 } }}
@@ -124,15 +125,6 @@ export default function Hero({ startReveal }: HeroProps) {
           </div>
         </motion.div>
 
-        {/* Right col: title */}
-        <motion.div className="hero-right" variants={heroSequence}>
-          <motion.h2
-            className="hero-title"
-            variants={heroItem}
-          >
-            UI/UX &amp;<br />Product Design
-          </motion.h2>
-        </motion.div>
       </motion.div>
 
       {/* Scroll indicator */}

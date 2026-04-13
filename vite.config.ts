@@ -8,5 +8,8 @@ export default defineConfig(({ command }) => {
   return {
     base,
     plugins: [react()],
+    server: {
+      allowedHosts: ['.ngrok-free.dev', '.ngrok.io'],
+    },
   }
 })
