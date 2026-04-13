@@ -25,6 +25,8 @@ type HeroProps = {
   startReveal: boolean
 }
 
+const RESUME_IMAGE_URL = '/resume.png'
+
 export default function Hero({ startReveal }: HeroProps) {
   const heroRef = useRef<HTMLElement>(null)
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] })
@@ -113,7 +115,8 @@ export default function Hero({ startReveal }: HeroProps) {
               </p>
             </motion.div>
             <motion.a
-              href="#contact"
+              href={RESUME_IMAGE_URL}
+              download="resume.png"
               className="btn btn-outline hero-btn"
               variants={heroItem}
               whileHover={{ scale: 1.04, transition: { duration: 0.2 } }}
