@@ -43,8 +43,8 @@ export default function Hero({ startReveal }: HeroProps) {
           loading="eager"
           fetchPriority="high"
           style={{ y: bgY }}
-          initial={{ scale: 1.18 }}
-          animate={{ scale: 1.08 }}
+          initial={{ scale: 1.02 }}
+          animate={{ scale: 0.98 }}
           transition={{ duration: 14, ease: [0.25, 0.46, 0.45, 0.94] }}
         />
         <div className="hero-motion-layer" aria-hidden>
