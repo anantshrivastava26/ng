@@ -43,8 +43,8 @@ export default function Hero({ startReveal }: HeroProps) {
           loading="eager"
           fetchPriority="high"
           style={{ y: bgY }}
-          initial={{ scale: 1.02 }}
-          animate={{ scale: 0.98 }}
+          initial={{ scale: 1.1 }}
+          animate={{ scale: 1.04 }}
           transition={{ duration: 14, ease: [0.25, 0.46, 0.45, 0.94] }}
         />
         <div className="hero-motion-layer" aria-hidden>
@@ -55,9 +55,7 @@ export default function Hero({ startReveal }: HeroProps) {
           />
           <motion.div
             className="hero-depth-word"
-            style={{ scaleY: 2 }}
-            animate={{ scale: [1, 1.03, 1] }}
-            transition={{ duration: 16, repeat: Infinity, ease: 'easeInOut' }}
+            style={{ scaleY: 1 }}
           >
             PORTFOLIO
           </motion.div>
@@ -127,15 +125,6 @@ export default function Hero({ startReveal }: HeroProps) {
           </div>
         </motion.div>
 
-        {/* Right col: title */}
-        <motion.div className="hero-right" variants={heroSequence}>
-          <motion.h2
-            className="hero-title"
-            variants={heroItem}
-          >
-            UI/UX &amp;<br />Product Design
-          </motion.h2>
-        </motion.div>
       </motion.div>
 
       {/* Scroll indicator */}

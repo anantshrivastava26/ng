@@ -252,7 +252,7 @@ export default function Projects() {
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
             >
-              View all miscellaneous projects →
+              View all projects →
             </motion.button>
           </div>
         </div>
@@ -286,7 +286,7 @@ export default function Projects() {
             onClick={(event) => event.stopPropagation()}
           >
             <div className="projects-modal-head">
-              <h3 id="projects-modal-title">All Miscellaneous Projects</h3>
+              <h3 id="projects-modal-title">Miscellaneous Projects</h3>
               <div className="projects-modal-actions">
                 <button type="button" onClick={() => setProjectsModalOpen(false)}>
                   Close
