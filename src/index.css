@@ -1298,6 +1298,24 @@ img { display: block; max-width: 100%; }
 
 .tool-item:hover { opacity: 0.6; padding-left: 8px; }
 
+.tools-additional-info {
+  margin-top: 20px;
+}
+
+.tools-additional-title {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 10px;
+}
+
+.tools-additional-copy {
+  font-size: 14px;
+  line-height: 1.6;
+  opacity: 0.9;
+  max-width: 66ch;
+}
+
 .logo-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
