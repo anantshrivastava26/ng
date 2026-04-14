@@ -121,6 +121,7 @@ export default function Methodology() {
                   </motion.li>
                 ))}
               </motion.ul>
+
             </div>
 
             <div className="logo-grid">
@@ -142,6 +143,33 @@ export default function Methodology() {
                 </motion.div>
               ))}
             </div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              viewport={{ once: true, margin: '-100px' }}
+              className="tools-additional-info"
+            >
+              <motion.h3
+                initial={{ opacity: 0, y: 8 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.48 }}
+                viewport={{ once: true, margin: '-100px' }}
+                className="tools-additional-title"
+              >
+                Always Learning
+              </motion.h3>
+              <motion.p
+                initial={{ opacity: 0, y: 8 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.56 }}
+                viewport={{ once: true, margin: '-100px' }}
+                className="tools-additional-copy"
+              >
+                I'm constantly expanding my skillset and staying updated with the latest technologies and industry best practices.
+              </motion.p>
+            </motion.div>
           </div>
         </div>
       </div>
