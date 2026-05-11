@@ -51,7 +51,7 @@ const TREND_FORECASTING_PDF = '/misc/trend%20forecasting.pdf'
 const TREND_FORECASTING_COVER = '/misc/cover.png'
 const COFFEE_TABLE_BOOK_PDF = '/misc/coffee%20table%20book.pdf'
 const COFFEE_TABLE_BOOK_COVER = '/misc/coverrr.png'
-const TRASH_BASH_PROJECT = 'public/assets/trash-bash.png'
+const TRASH_BASH_PROJECT = 'public/assets/TRASH BASH.pdf'
 
 const projects: Project[] = [
   {
@@ -132,7 +132,7 @@ function ProjectTile({ project, index }: { project: Project; index: number }) {
       onMouseLeave={handleMouseLeave}
     >
       <a
-        href={project.link}
+        href={encodeURI(project.link)}
         className="project-tile-image-link"
         download={project.downloadFileName}
         target={project.downloadFileName ? undefined : '_blank'}
@@ -167,7 +167,7 @@ function ProjectTile({ project, index }: { project: Project; index: number }) {
         <h3>{project.name}</h3>
         <p>{project.desc}</p>
         <motion.a
-          href={project.link}
+          href={encodeURI(project.link)}
           className="project-link"
           download={project.downloadFileName}
           target={project.downloadFileName ? undefined : '_blank'}
