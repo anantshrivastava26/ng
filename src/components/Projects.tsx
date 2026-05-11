@@ -59,7 +59,7 @@ const projects: Project[] = [
     desc: 'A community cleanup initiative',
     tags: ['Campaign', 'Research'],
     image: '/assets/trash-bash.png',
-    link: 'TRASH_BASH_PROJECT',
+    link: TRASH_BASH_PROJECT,
     downloadFileName: 'TRASH BASH.pdf',
     linkLabel: 'View Project ↗',
   },
