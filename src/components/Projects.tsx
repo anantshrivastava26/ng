@@ -51,7 +51,7 @@ const TREND_FORECASTING_PDF = '/misc/trend%20forecasting.pdf'
 const TREND_FORECASTING_COVER = '/misc/cover.png'
 const COFFEE_TABLE_BOOK_PDF = '/misc/coffee%20table%20book.pdf'
 const COFFEE_TABLE_BOOK_COVER = '/misc/coverrr.png'
-const TRASH_BASH_PROJECT = 'public/assets/trash-bash.png'
+const TRASH_BASH_PROJECT = 'public/assets/TRASH BASH.pdf'
 
 const projects: Project[] = [
   {
@@ -59,7 +59,7 @@ const projects: Project[] = [
     desc: 'A community cleanup initiative',
     tags: ['Campaign', 'Research'],
     image: '/assets/trash-bash.png',
-    link: 'public/assets/TRASH BASH.pdf',
+    link: 'TRASH_BASH_PROJECT',
     downloadFileName: 'TRASH BASH.pdf',
     linkLabel: 'View Project ↗',
   },
