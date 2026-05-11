@@ -59,7 +59,7 @@ const projects: Project[] = [
     desc: 'A community cleanup initiative',
     tags: ['Campaign', 'Research'],
     image: '/assets/trash-bash.png',
-    link: TRASH_BASH_PROJECT,
+    link: 'public/assets/TRASH BASH.pdf',
     downloadFileName: 'TRASH BASH.pdf',
     linkLabel: 'View Project ↗',
   },
@@ -132,7 +132,7 @@ function ProjectTile({ project, index }: { project: Project; index: number }) {
       onMouseLeave={handleMouseLeave}
     >
       <a
-        href={project.link}
+        href={encodeURI(project.link)}
         className="project-tile-image-link"
         download={project.downloadFileName}
         target={project.downloadFileName ? undefined : '_blank'}
@@ -167,7 +167,7 @@ function ProjectTile({ project, index }: { project: Project; index: number }) {
         <h3>{project.name}</h3>
         <p>{project.desc}</p>
         <motion.a
-          href={project.link}
+          href={encodeURI(project.link)}
           className="project-link"
           download={project.downloadFileName}
           target={project.downloadFileName ? undefined : '_blank'}
