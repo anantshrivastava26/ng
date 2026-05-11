@@ -39,6 +39,7 @@ interface Project {
   link: string
   offset?: boolean
   downloadFileName?: string
+  linkLabel?: string
   imagePosition?: string
 }
 
@@ -50,14 +51,17 @@ const TREND_FORECASTING_PDF = '/misc/trend%20forecasting.pdf'
 const TREND_FORECASTING_COVER = '/misc/cover.png'
 const COFFEE_TABLE_BOOK_PDF = '/misc/coffee%20table%20book.pdf'
 const COFFEE_TABLE_BOOK_COVER = '/misc/coverrr.png'
+const TRASH_BASH_PROJECT = 'public/assets/trash-bash.png'
 
 const projects: Project[] = [
   {
-    name: 'Saanjh',
-    desc: 'A Digital Experience for Craft-Led Lighting',
-    tags: ['Product Design', 'UI Design'],
-    image: `${BASE}hIMdQAU8hOgi8GFT4vPLwwAILz0.png`,
-    link: SAANJH_PROJECT,
+    name: 'Trash Bash',
+    desc: 'A community cleanup initiative',
+    tags: ['Campaign', 'Research'],
+    image: '/assets/trash-bash.png',
+    link: TRASH_BASH_PROJECT,
+    downloadFileName: 'TRASH BASH.pdf',
+    linkLabel: 'View Project ↗',
   },
   {
     name: 'Pawzo',
@@ -77,6 +81,13 @@ const projects: Project[] = [
 ]
 
 const miscellaneousProjects: Project[] = [
+  {
+    name: 'Saanjh',
+    desc: 'A Digital Experience for Craft-Led Lighting',
+    tags: ['Product Design', 'UI Design'],
+    image: `${BASE}hIMdQAU8hOgi8GFT4vPLwwAILz0.png`,
+    link: SAANJH_PROJECT,
+  },
   {
     name: 'Trend Forecasting',
     desc: 'Lifestyle and design trend study with insights, material signals, and future-facing direction.',
@@ -163,7 +174,7 @@ function ProjectTile({ project, index }: { project: Project; index: number }) {
           rel={project.downloadFileName ? undefined : 'noreferrer'}
           whileHover={{ gap: '8px' }}
         >
-          {project.downloadFileName ? 'Download Project ↓' : 'View Project ↗'}
+          {project.linkLabel ?? (project.downloadFileName ? 'Download Project ↓' : 'View Project ↗')}
         </motion.a>
       </div>
     </motion.div>
