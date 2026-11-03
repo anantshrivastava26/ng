@@ -17,6 +17,8 @@ type ExperienceItem = {
   period: string
   mark?: string
   logo?: string
+  /** Watermark opacity override (default 0.05 in CSS) — light logos need more. */
+  watermarkOpacity?: number
   highlights: string[]
 }
 
@@ -28,6 +30,7 @@ const EXPERIENCE: ExperienceItem[] = [
     period: 'May 2026 – July 2026',
     mark: 'M',
     logo: '/assets/experience/mcdonalds.png',
+    watermarkOpacity: 0.16,
     highlights: [
       "Developed UI elements based on UX principles for an upcoming redesign of the official McDonald's website.",
       'Worked with interface hierarchy and navigation while maintaining a consistent visual direction.',
@@ -112,10 +115,10 @@ function Reveal({
   )
 }
 
-function Mark({ item, className }: { item: ExperienceItem; className: string }) {
+function Mark({ item, className, style }: { item: ExperienceItem; className: string; style?: React.CSSProperties }) {
   if (!item.logo && !item.mark) return null
   return item.logo ? (
-    <img src={item.logo} alt="" className={className} loading="lazy" />
+    <img src={item.logo} alt="" className={className} style={style} loading="lazy" />
   ) : (
     <span className={`${className} xp-monogram`}>{item.mark}</span>
   )
@@ -153,7 +156,11 @@ export default function Experience() {
             <motion.article key={item.company + item.title} className="xp-card" variants={cardVariants} whileHover={{ y: -6 }}>
               {(item.logo || item.mark) && (
                 <div className="xp-watermark" aria-hidden="true">
-                  <Mark item={item} className="xp-watermark-mark" />
+                  <Mark
+                    item={item}
+                    className="xp-watermark-mark"
+                    style={item.watermarkOpacity ? { opacity: item.watermarkOpacity } : undefined}
+                  />
                 </div>
               )}
 

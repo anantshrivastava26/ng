@@ -106,8 +106,8 @@ img { display: block; max-width: 100%; }
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 18px;
-  height: 18px;
+  width: 21px;
+  height: 21px;
   color: currentColor;
   flex-shrink: 0;
 }
@@ -763,6 +763,9 @@ img { display: block; max-width: 100%; }
 }
 
 .about-media {
+  /* gap between the purple accent's bottom edge and the media box's bottom */
+  --about-accent-gap: 15%;
+  --about-accent-radius: 52px;
   position: relative;
   min-height: 700px;
   overflow: hidden;
@@ -775,17 +778,23 @@ img { display: block; max-width: 100%; }
   top: 50%;
   transform: translateY(-50%);
   width: 42%;
-  height: 70%;
-  border-radius: 0 52px 52px 0;
+  height: calc(100% - 2 * var(--about-accent-gap));
+  border-radius: 0 var(--about-accent-radius) var(--about-accent-radius) 0;
   background: #a66fd1;
 }
 
 .about-portrait {
-  position: relative;
+  /* photo's flat bottom edge sits on the purple accent's bottom edge */
+  position: absolute;
+  right: 0;
+  bottom: var(--about-accent-gap);
   z-index: 2;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
+  max-height: calc(100% - var(--about-accent-gap));
+  object-fit: contain;
+  object-position: right bottom;
+  border-bottom-right-radius: var(--about-accent-radius);
 }
 
 .about-copy-col {
@@ -1432,8 +1441,8 @@ img { display: block; max-width: 100%; }
 }
 
 .logo-mark {
-  width: 44px;
-  height: 44px;
+  width: 50px;
+  height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1693,10 +1702,13 @@ img { display: block; max-width: 100%; }
     min-height: 440px;
   }
 
+  .about-media {
+    --about-accent-gap: 18%;
+    --about-accent-radius: 40px;
+  }
+
   .about-media-accent {
     width: 40%;
-    height: 64%;
-    border-radius: 0 40px 40px 0;
   }
 
   .about-title {
