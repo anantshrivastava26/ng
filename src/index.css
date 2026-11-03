@@ -1163,6 +1163,66 @@ img { display: block; max-width: 100%; }
   white-space: nowrap;
 }
 
+/* Sticky scroll showcase: left column pins the active number + title,
+   right column scrolls through the project tiles */
+.projects-scroll {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 48px;
+}
+
+.projects-scroll-left {
+  flex: 1 1 0;
+  min-width: 0;
+  align-self: stretch;
+  padding-right: 40px;
+}
+
+.projects-scroll-sticky {
+  position: sticky;
+  top: 120px;
+}
+
+.projects-scroll-number-wrap {
+  display: grid;
+  font-size: clamp(120px, 14vw, 200px);
+  height: 0.8em;
+  overflow: hidden;
+}
+
+.projects-scroll-number {
+  grid-area: 1 / 1;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.06em;
+  color: rgba(126, 25, 176, 0.16);
+}
+
+.projects-scroll-title {
+  font-size: clamp(28px, 3vw, 44px);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  margin-top: 12px;
+}
+
+.projects-scroll-right {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 140px;
+  padding-left: 40px;
+}
+
+.projects-scroll-item .project-tile {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.projects-scroll-inline-head { display: none; }
+
 .project-tile {
   display: flex;
   flex-direction: column;
@@ -1670,6 +1730,8 @@ img { display: block; max-width: 100%; }
 
   .projects-grid { gap: 8px; }
   .project-tile--mid { margin-top: 32px; }
+  .projects-scroll-left { padding-right: 24px; }
+  .projects-scroll-right { padding-left: 24px; gap: 100px; }
   .projects-grid--modal { grid-template-columns: repeat(2, 1fr); }
 
   .methodology .section-header,
@@ -1739,6 +1801,21 @@ img { display: block; max-width: 100%; }
 
   .projects-grid { grid-template-columns: 1fr; gap: 32px; }
   .project-tile--mid { margin-top: 0; }
+  .projects-scroll-left { display: none; }
+  .projects-scroll-right { padding-left: 0; gap: 64px; }
+  .projects-scroll-item .project-tile { max-width: none; }
+  .projects-scroll-inline-head { display: block; margin-bottom: 16px; }
+  .projects-scroll-inline-number {
+    display: block;
+    height: 0.8em;
+    overflow: hidden;
+    font-size: 96px;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.06em;
+    color: rgba(126, 25, 176, 0.16);
+  }
+  .projects-scroll-inline-head .projects-scroll-title { margin-top: 4px; }
   .projects-modal-backdrop { padding: 14px; }
   .projects-modal { max-height: calc(100vh - 28px); }
   .projects-modal-head {
