@@ -16,11 +16,10 @@ const revealContainerVariants = {
 }
 
 const revealWordVariants = {
-  hidden: { opacity: 0, y: 10, filter: 'blur(3px)' },
+  hidden: { opacity: 0, y: 10 },
   visible: {
     opacity: 1,
     y: 0,
-    filter: 'blur(0px)',
     transition: { duration: 1.1, ease: [0.22, 1, 0.36, 1] as const },
   },
 }
@@ -137,7 +136,7 @@ export default function Methodology() {
                   whileHover={{ background: 'rgba(255,255,255,0.15)', color: '#fff', scale: 1.05 }}
                 >
                   <div className="logo-mark" aria-hidden="true">
-                    <img src={logo.src} alt="" />
+                    <img src={logo.src} alt="" loading="lazy" decoding="async" />
                   </div>
                   <span className="sr-only">{logo.name}</span>
                 </motion.div>

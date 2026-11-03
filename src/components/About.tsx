@@ -28,21 +28,19 @@ const pillContainerVariants = {
 }
 
 const pillVariants = {
-  hidden: { opacity: 0, y: 16, filter: 'blur(6px)' },
+  hidden: { opacity: 0, y: 16 },
   visible: {
     opacity: 1,
     y: 0,
-    filter: 'blur(0px)',
     transition: { duration: 1.7, ease: [0.22, 1, 0.36, 1] as const },
   },
 }
 
 const bioWordVariants = {
-  hidden: { opacity: 0, y: 10, filter: 'blur(3px)' },
+  hidden: { opacity: 0, y: 10 },
   visible: {
     opacity: 1,
     y: 0,
-    filter: 'blur(0px)',
     transition: { duration: 1.1, ease: [0.22, 1, 0.36, 1] as const },
   },
 }
@@ -64,7 +62,7 @@ export default function About() {
             transition={{ duration: 3, ease: [0.22, 1, 0.36, 1] }}
           >
             <div className="about-media-accent" aria-hidden="true" />
-            <img src="/assets/portfolio pic.png" alt="Navya Grover" className="about-portrait" />
+            <img src="/assets/portfolio-pic.webp" alt="Navya Grover" className="about-portrait" loading="lazy" decoding="async" />
           </motion.figure>
 
           <motion.div

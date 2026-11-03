@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import { motion, useMotionValue, useSpring } from 'framer-motion'
 
+const HOVER_TARGETS = 'a, button, .project-tile, .bento-card, .tool-item'
+
 export default function Cursor() {
   const [isHovering, setIsHovering] = useState(false)
   const [mounted, setMounted] = useState(false)
@@ -25,19 +27,25 @@ export default function Cursor() {
     setMounted(true)
     body.classList.add('cursor-ready')
 
+    // mousemove only updates motion values (no layout reads, no React renders)
     const onMove = (e: MouseEvent) => {
-      const el = document.elementFromPoint(e.clientX, e.clientY) as HTMLElement | null
-
       mouseX.set(e.clientX)
       mouseY.set(e.clientY)
-
-      setIsHovering(Boolean(el?.closest('a, button, .project-tile, .bento-card, .tool-item')))
     }
 
-    window.addEventListener('mousemove', onMove)
+    // Hover detection via mouseover fires only when the target element changes,
+    // instead of calling elementFromPoint() on every mousemove.
+    const onOver = (e: MouseEvent) => {
+      const target = e.target as Element | null
+      setIsHovering(Boolean(target?.closest?.(HOVER_TARGETS)))
+    }
+
+    window.addEventListener('mousemove', onMove, { passive: true })
+    document.addEventListener('mouseover', onOver, { passive: true })
 
     return () => {
       window.removeEventListener('mousemove', onMove)
+      document.removeEventListener('mouseover', onOver)
       body.classList.remove('cursor-ready')
     }
   }, [mouseX, mouseY])

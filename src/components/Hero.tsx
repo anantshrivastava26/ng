@@ -1,60 +1,40 @@
-import { useEffect, useId, useLayoutEffect, useRef, useState } from 'react'
-import {
-  motion,
-  useAnimationFrame,
-  useMotionValue,
-  useReducedMotion,
-  useScroll,
-  useTransform,
-} from 'framer-motion'
+import { useEffect, useId, useLayoutEffect, useRef, useState, type RefObject } from 'react'
+import { animate, motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
 
 /*
- * Landing hero modelled on the "Cohesion" Framer template:
- * - giant name ticker running behind the profile stack
- * - "Hi, I'm …" heading, auto-cycling skills pill, flip-on-hover avatar card
- * - CTA pill whose arrow slides in on hover
- * - floating 3D shapes with a mirrored bob loop
- * - per-element scroll parallax using the template's Framer "speed" values
- *   (100 = moves with the page, >100 moves faster, <100 lags behind)
+ * Landing hero:
+ * - "Designing experiences!" heading + "UX/UI Design" pill above the avatar card
+ * - flip-on-hover avatar card (desktop), tagline + resume CTA below it
+ * - floating 3D tool logos that pop out from behind the avatar card once the
+ *   loader finishes, then settle into a gentle bob with scroll parallax
+ *   (Framer-style speed: 100 = moves with the page, >100 faster, <100 slower)
  */
 
-const NAME = 'NAVYA GROVER '
-const FIRST_NAME = 'Navya'
-
-const SKILLS = [
-  'UI/UX Design',
-  'Research-led Discovery',
-  'Product Design',
-  'Interface Systems',
-  'Human-centred Storytelling',
-]
-
-const TOOLS = [
-  { src: '/assets/logos/figma.svg', alt: 'Figma' },
-  { src: '/assets/logos/framer.svg', alt: 'Framer' },
-  { src: '/assets/logos/illustrator.svg', alt: 'Illustrator' },
-]
+const RESUME_URL = '/Navya-Grover-Resume.pdf'
 
 // Avatar illustration shown on the front of the flip card
-const AVATAR = '/assets/hero-avatar.png'
+const AVATAR = '/assets/hero-avatar.webp'
 
 // Framer's default component spring in the template (damping 60, stiffness 500)
 const SPRING = { type: 'spring', damping: 60, stiffness: 500, mass: 1 } as const
 
-type ShapeDef = {
+type LogoDef = {
   key: string
+  alt: string
   speed: number
   loop: number
   rotate?: number
 }
 
-const SHAPES: ShapeDef[] = [
-  { key: 'orange-pyramid', speed: 140, loop: 2.4, rotate: 10 },
-  { key: 'purple-sphere', speed: 150, loop: 2 },
-  { key: 'blue-cylinder', speed: 160, loop: 2.8, rotate: -55 },
-  { key: 'turquoise-star', speed: 140, loop: 2.8 },
-  { key: 'green-element', speed: 150, loop: 2 },
-  { key: 'yellow-cube', speed: 160, loop: 2.4 },
+// Placement lives in CSS (.ch-shape--<key>): left column = figma / procreate /
+// illustrator, right column = photoshop / blender / autocad.
+const LOGOS: LogoDef[] = [
+  { key: 'figma', alt: 'Figma', speed: 140, loop: 2.4, rotate: -10 },
+  { key: 'procreate', alt: 'Procreate', speed: 150, loop: 2 },
+  { key: 'illustrator', alt: 'Adobe Illustrator', speed: 160, loop: 2.8 },
+  { key: 'photoshop', alt: 'Adobe Photoshop', speed: 140, loop: 2.8 },
+  { key: 'blender', alt: 'Blender', speed: 150, loop: 2 },
+  { key: 'autocad', alt: 'AutoCAD', speed: 160, loop: 2.4 },
 ]
 
 /* ── helpers ─────────────────────────────────────────────────────────────── */
@@ -82,70 +62,6 @@ function useParallax(speed: number) {
 }
 
 /* ── pieces ──────────────────────────────────────────────────────────────── */
-
-function NameTicker({ text, speed }: { text: string; speed: number }) {
-  const wrapRef = useRef<HTMLDivElement>(null)
-  const itemRef = useRef<HTMLDivElement>(null)
-  const [itemWidth, setItemWidth] = useState(0)
-  const [copies, setCopies] = useState(2)
-  const x = useMotionValue(0)
-  const reduce = useReducedMotion()
-
-  useLayoutEffect(() => {
-    const measure = () => {
-      const w = itemRef.current?.offsetWidth ?? 0
-      const cw = wrapRef.current?.offsetWidth ?? 0
-      setItemWidth(w)
-      if (w > 0) setCopies(Math.ceil(cw / w) + 1)
-    }
-    measure()
-    const ro = new ResizeObserver(measure)
-    if (wrapRef.current) ro.observe(wrapRef.current)
-    if (itemRef.current) ro.observe(itemRef.current)
-    document.fonts?.ready.then(measure).catch(() => {})
-    return () => ro.disconnect()
-  }, [])
-
-  useAnimationFrame((_, delta) => {
-    if (!itemWidth || reduce) return
-    let next = x.get() - (speed * delta) / 1000
-    if (next <= -itemWidth) next += itemWidth
-    x.set(next)
-  })
-
-  return (
-    <div ref={wrapRef} className="ch-ticker" aria-hidden="true" style={{ opacity: itemWidth ? 1 : 0 }}>
-      <motion.div className="ch-ticker-track" style={{ x }}>
-        {Array.from({ length: copies }, (_, i) => (
-          <div key={i} ref={i === 0 ? itemRef : undefined} className="ch-ticker-item">
-            {text}
-          </div>
-        ))}
-      </motion.div>
-    </div>
-  )
-}
-
-function SkillsList() {
-  const [index, setIndex] = useState(0)
-  const reduce = useReducedMotion()
-
-  useEffect(() => {
-    if (reduce) return
-    const t = window.setTimeout(() => setIndex((i) => (i + 1) % SKILLS.length), 3000)
-    return () => window.clearTimeout(t)
-  }, [index, reduce])
-
-  return (
-    <div className="ch-skills">
-      <motion.ul className="ch-skills-list" animate={{ y: -32 * index }} transition={SPRING}>
-        {SKILLS.map((skill) => (
-          <li key={skill}>{skill}</li>
-        ))}
-      </motion.ul>
-    </div>
-  )
-}
 
 function ArcText({ text }: { text: string }) {
   const id = `arc-${useId().replace(/:/g, '')}`
@@ -187,9 +103,9 @@ function ArrowDown({ className }: { className?: string }) {
 }
 
 /**
- * The template's flip card. Front: avatar illustration on lilac, tilted 10°.
- * Hover (desktop only): the front spins to -180° and the frosted "scroll down"
- * back swings in to -10°, using the template's values and spring.
+ * Flip card. Front: avatar illustration on lilac, tilted 10° (legs cropped by
+ * the card on purpose). Hover (desktop only): the front spins to -180° and the
+ * frosted "scroll down" back swings in to -10°.
  * If the avatar image is missing, only the back face is shown (no flip).
  */
 function PhotoCard({ canFlip }: { canFlip: boolean }) {
@@ -264,6 +180,8 @@ function CtaButton({ label, href }: { label: string; href: string }) {
     <a
       className="ch-cta"
       href={href}
+      target="_blank"
+      rel="noreferrer"
       onMouseEnter={() => setActive(true)}
       onMouseLeave={() => setActive(false)}
       onFocus={() => setActive(true)}
@@ -279,7 +197,7 @@ function CtaButton({ label, href }: { label: string; href: string }) {
         <motion.span
           className="ch-cta-icon"
           initial={false}
-          animate={{ right: active ? 0 : -78, rotate: active ? 0 : 180 }}
+          animate={{ right: active ? 0 : -78, rotate: active ? -90 : 180 }}
           transition={SPRING}
         >
           <ArrowDown />
@@ -289,77 +207,129 @@ function CtaButton({ label, href }: { label: string; href: string }) {
   )
 }
 
-function Shape({ shape, phone, reduce }: { shape: ShapeDef; phone: boolean; reduce: boolean }) {
-  const y = useParallax(reduce ? 100 : phone ? 90 : shape.speed)
+function Logo({
+  logo,
+  index,
+  phone,
+  reduce,
+  ready,
+  originRef,
+}: {
+  logo: LogoDef
+  index: number
+  phone: boolean
+  reduce: boolean
+  ready: boolean
+  originRef: RefObject<HTMLDivElement>
+}) {
+  const popRef = useRef<HTMLDivElement>(null)
+  const y = useParallax(reduce ? 100 : phone ? 90 : logo.speed)
+
+  // Pop out from behind the avatar card: start small at the card's centre,
+  // then spring out (with a little overshoot) to the logo's resting spot.
+  useLayoutEffect(() => {
+    const el = popRef.current
+    if (!ready || !el) return
+    const origin = originRef.current
+
+    if (reduce || !origin) {
+      const fadeOnly = animate(el, { opacity: 1 }, { duration: 0.4, delay: index * 0.06 })
+      return () => fadeOnly.stop()
+    }
+
+    const a = el.getBoundingClientRect()
+    const o = origin.getBoundingClientRect()
+    const dx = o.left + o.width / 2 - (a.left + a.width / 2)
+    const dy = o.top + o.height / 2 - (a.top + a.height / 2)
+    const delay = 0.15 + index * 0.09
+
+    const move = animate(
+      el,
+      { x: [dx, 0], y: [dy, 0], scale: [0.2, 1], rotate: [index % 2 ? 25 : -25, 0] },
+      { type: 'spring', stiffness: 170, damping: 14, mass: 1, delay },
+    )
+    const fade = animate(el, { opacity: [0, 1] }, { duration: 0.25, delay })
+    return () => {
+      move.stop()
+      fade.stop()
+    }
+  }, [ready, reduce, index, originRef])
+
   return (
-    <div className={`ch-shape ch-shape--${shape.key}`}>
-      <motion.div className="ch-shape-parallax" style={{ y }}>
-        <motion.img
-          src={`/assets/hero3d/${shape.key}.png`}
-          alt=""
-          draggable={false}
-          style={{ scale: 0.8, rotate: shape.rotate ?? 0, transformPerspective: 1200 }}
-          animate={reduce ? undefined : { y: [0, 12] }}
-          transition={{ duration: shape.loop, ease: 'linear', repeat: Infinity, repeatType: 'mirror' }}
-        />
-      </motion.div>
+    <div className={`ch-shape ch-shape--${logo.key}`}>
+      <div ref={popRef} className="ch-shape-pop" style={{ opacity: 0 }}>
+        <motion.div className="ch-shape-parallax" style={{ y }}>
+          <motion.img
+            src={`/assets/tools/${logo.key}.webp`}
+            alt={logo.alt}
+            draggable={false}
+            style={{ scale: 0.8, rotate: logo.rotate ?? 0, transformPerspective: 1200 }}
+            animate={reduce ? undefined : { y: [0, 12] }}
+            transition={{ duration: logo.loop, ease: 'linear', repeat: Infinity, repeatType: 'mirror' }}
+          />
+        </motion.div>
+      </div>
     </div>
   )
 }
 
 /* ── hero ────────────────────────────────────────────────────────────────── */
 
-export default function Hero() {
+/** `ready` flips to true once the loading screen has gone, which starts the logo pop-out. */
+export default function Hero({ ready = true }: { ready?: boolean }) {
   const phone = useMedia('(max-width: 809.98px)')
   const desktop = useMedia('(min-width: 1200px)')
   const reduce = !!useReducedMotion()
+  const photoRef = useRef<HTMLDivElement>(null)
 
-  // Template speeds: [desktop/tablet, phone]
+  // Speeds: [desktop/tablet, phone]
   const s = (base: number, onPhone: number) => (reduce ? 100 : phone ? onPhone : base)
-  const yClients = useParallax(s(90, 95))
+  const yTagline = useParallax(s(90, 95))
   const yHeading = useParallax(s(130, 95))
-  const ySkills = useParallax(s(130, 95))
+  const ySubtitle = useParallax(s(130, 95))
   const yPhoto = useParallax(s(140, 110))
   const yCta = useParallax(s(90, 95))
 
   return (
     <section className="ch-hero" id="hero">
       <div className="ch-top">
-        {!phone && <NameTicker text={NAME} speed={60} />}
-
         <div className="ch-profile">
-          <motion.div className="ch-clients" style={{ y: yClients }}>
-            {TOOLS.map((tool, i) => (
-              <span key={tool.alt} className="ch-avatar" style={{ left: i * 28 }}>
-                <img src={tool.src} alt={tool.alt} />
-              </span>
-            ))}
-            <p>Tools I live in</p>
-          </motion.div>
-
           <motion.h1 className="ch-hi" style={{ x: '-50%', y: yHeading }}>
-            Hi, I&apos;m <span>{FIRST_NAME}</span>!
+            Designing <span>experiences</span>!
           </motion.h1>
 
-          <motion.div className="ch-skills-wrap" style={{ x: '-50%', y: ySkills }}>
-            <SkillsList />
+          <motion.div className="ch-skills-wrap" style={{ x: '-50%', y: ySubtitle }}>
+            <p className="ch-subtitle">UX/UI Design</p>
           </motion.div>
 
           <motion.div
+            ref={photoRef}
             className="ch-photo-wrap"
             style={{ y: yPhoto, originY: 0, transformPerspective: 1200 }}
           >
             <PhotoCard canFlip={desktop && !reduce} />
           </motion.div>
 
+          <motion.p className="ch-tagline" style={{ x: '-50%', y: yTagline }}>
+            Turning insights into interactions.
+          </motion.p>
+
           <motion.div className="ch-cta-wrap" style={{ x: '-50%', y: yCta }}>
-            <CtaButton label={phone ? 'Contact Me' : "Let's Work Together!"} href="#contact" />
+            <CtaButton label={phone ? 'My Resume' : 'Check out my resume!'} href={RESUME_URL} />
           </motion.div>
         </div>
 
-        <div className="ch-shapes" aria-hidden="true">
-          {SHAPES.map((shape) => (
-            <Shape key={shape.key} shape={shape} phone={phone} reduce={reduce} />
+        <div className="ch-shapes">
+          {LOGOS.map((logo, i) => (
+            <Logo
+              key={logo.key}
+              logo={logo}
+              index={i}
+              phone={phone}
+              reduce={reduce}
+              ready={ready}
+              originRef={photoRef}
+            />
           ))}
         </div>
       </div>

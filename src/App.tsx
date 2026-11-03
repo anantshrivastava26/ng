@@ -5,6 +5,7 @@ import ScrollProgress from './components/ScrollProgress'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import About from './components/About'
+import Experience from './components/Experience'
 import Benefits from './components/Benefits'
 import Projects from './components/Projects'
 import Methodology from './components/Methodology'
@@ -29,10 +30,11 @@ export default function App() {
       </AnimatePresence>
       <Cursor />
       <main>
-        <Hero />
+        <Hero ready={showContent} />
         {showContent && (
           <>
             <About />
+            <Experience />
             <Benefits />
             <Projects />
             <Methodology />
