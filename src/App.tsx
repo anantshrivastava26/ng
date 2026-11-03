@@ -29,7 +29,7 @@ export default function App() {
       </AnimatePresence>
       <Cursor />
       <main>
-        <Hero startReveal={showContent} />
+        <Hero />
         {showContent && (
           <>
             <About />
