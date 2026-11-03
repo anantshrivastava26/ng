@@ -18,16 +18,17 @@ export default function App() {
   const [showContent, setShowContent] = useState(false)
 
   useEffect(() => {
-    const timer = window.setTimeout(() => setShowLoader(false), 2500)
+    const timer = window.setTimeout(() => {
+      setShowLoader(false)
+      setShowContent(true)
+    }, 2500)
     return () => window.clearTimeout(timer)
   }, [])
 
   return (
     <>
       <SmoothScroll />
-      <AnimatePresence onExitComplete={() => setShowContent(true)}>
-        {showLoader && <LoadingScreen />}
-      </AnimatePresence>
+      <AnimatePresence>{showLoader && <LoadingScreen />}</AnimatePresence>
       <Cursor />
       <main>
         <Hero ready={showContent} />

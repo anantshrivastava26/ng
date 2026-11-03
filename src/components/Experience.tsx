@@ -54,7 +54,6 @@ const EXPERIENCE: ExperienceItem[] = [
     company: 'Independent',
     location: 'Remote',
     period: 'Jun 2025 – Present',
-    logo: '/assets/experience/freelance.png',
     highlights: [
       'Created brand-consistent digital promotional assets.',
       'Managed projects from concept to final delivery with design consistency.',

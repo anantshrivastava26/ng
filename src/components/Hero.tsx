@@ -287,7 +287,7 @@ function Logo({
     const origin = originRef.current
 
     if (reduce || !origin) {
-      const fadeOnly = animate(el, { opacity: 1 }, { duration: 0.4, delay: index * 0.06 })
+      const fadeOnly = animate(el, { opacity: 1 }, { duration: 0.25, delay: index * 0.02 })
       return () => fadeOnly.stop()
     }
 
@@ -295,7 +295,7 @@ function Logo({
     const o = origin.getBoundingClientRect()
     const dx = o.left + o.width / 2 - (a.left + a.width / 2)
     const dy = o.top + o.height / 2 - (a.top + a.height / 2)
-    const delay = 0.15 + index * 0.09
+    const delay = index * 0.025
 
     const move = animate(
       el,
