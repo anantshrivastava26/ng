@@ -1,3 +1,4 @@
+import type { CSSProperties, ReactNode } from 'react'
 import { motion } from 'framer-motion'
 
 /*
@@ -17,10 +18,22 @@ type ExperienceItem = {
   period: string
   mark?: string
   logo?: string
+  /** Inline SVG used when there is no company logo (e.g. freelance work). */
+  icon?: ReactNode
   /** Watermark opacity override (default 0.05 in CSS) — light logos need more. */
   watermarkOpacity?: number
   highlights: string[]
 }
+
+/* Briefcase mark for the freelance card, which has no company logo. */
+const FreelanceIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <rect x="2.5" y="7" width="19" height="13" rx="2.5" />
+    <path d="M9 7V5.5A1.5 1.5 0 0 1 10.5 4h3A1.5 1.5 0 0 1 15 5.5V7" />
+    <path d="M2.5 12.5h19" />
+    <path d="M10 12.5h4" />
+  </svg>
+)
 
 const EXPERIENCE: ExperienceItem[] = [
   {
@@ -54,6 +67,8 @@ const EXPERIENCE: ExperienceItem[] = [
     company: 'Independent',
     location: 'Remote',
     period: 'Jun 2025 – Present',
+    icon: <FreelanceIcon />,
+    watermarkOpacity: 0.07,
     highlights: [
       'Created brand-consistent digital promotional assets.',
       'Managed projects from concept to final delivery with design consistency.',
@@ -114,13 +129,23 @@ function Reveal({
   )
 }
 
-function Mark({ item, className, style }: { item: ExperienceItem; className: string; style?: React.CSSProperties }) {
-  if (!item.logo && !item.mark) return null
-  return item.logo ? (
-    <img src={item.logo} alt="" className={className} style={style} loading="lazy" />
-  ) : (
-    <span className={`${className} xp-monogram`}>{item.mark}</span>
-  )
+const hasMark = (item: ExperienceItem) => Boolean(item.logo || item.icon || item.mark)
+
+function Mark({ item, className, style }: { item: ExperienceItem; className: string; style?: CSSProperties }) {
+  if (item.logo) {
+    return <img src={item.logo} alt="" className={className} style={style} loading="lazy" />
+  }
+  if (item.icon) {
+    return (
+      <span className={`${className} xp-icon`} style={style} aria-hidden="true">
+        {item.icon}
+      </span>
+    )
+  }
+  if (item.mark) {
+    return <span className={`${className} xp-monogram`} style={style}>{item.mark}</span>
+  }
+  return null
 }
 
 export default function Experience() {
@@ -153,7 +178,7 @@ export default function Experience() {
         >
           {EXPERIENCE.map((item) => (
             <motion.article key={item.company + item.title} className="xp-card" variants={cardVariants} whileHover={{ y: -6 }}>
-              {(item.logo || item.mark) && (
+              {hasMark(item) && (
                 <div className="xp-watermark" aria-hidden="true">
                   <Mark
                     item={item}
@@ -164,7 +189,7 @@ export default function Experience() {
               )}
 
               <div className="xp-card-body">
-                {(item.logo || item.mark) && (
+                {hasMark(item) && (
                   <div className="xp-chip">
                     <Mark item={item} className="xp-chip-mark" />
                   </div>

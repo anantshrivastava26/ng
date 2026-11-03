@@ -1172,10 +1172,10 @@ img { display: block; max-width: 100%; }
 }
 
 .projects-scroll-left {
-  flex: 1 1 0;
+  flex: 0 0 34%;
   min-width: 0;
   align-self: stretch;
-  padding-right: 40px;
+  padding-right: 32px;
 }
 
 .projects-scroll-sticky {
@@ -1207,18 +1207,18 @@ img { display: block; max-width: 100%; }
 }
 
 .projects-scroll-right {
-  flex: 1 1 0;
+  flex: 1 1 auto;
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 140px;
-  padding-left: 40px;
+  gap: 120px;
+  padding-left: 32px;
 }
 
 .projects-scroll-item .project-tile {
   width: 100%;
-  max-width: 480px;
-  margin: 0 auto;
+  max-width: none;
+  margin: 0;
 }
 
 .projects-scroll-inline-head { display: none; }
@@ -1735,8 +1735,8 @@ img { display: block; max-width: 100%; }
 
   .projects-grid { gap: 8px; }
   .project-tile--mid { margin-top: 32px; }
-  .projects-scroll-left { padding-right: 24px; }
-  .projects-scroll-right { padding-left: 24px; gap: 100px; }
+  .projects-scroll-left { flex: 0 0 32%; padding-right: 24px; }
+  .projects-scroll-right { padding-left: 24px; gap: 96px; }
   .projects-grid--modal { grid-template-columns: repeat(2, 1fr); }
 
   .methodology .section-header,
@@ -1993,6 +1993,33 @@ img { display: block; max-width: 100%; }
 }
 
 .xp-monogram { display: flex; align-items: center; justify-content: center; }
+
+/* Inline-SVG mark (freelance card) — matches the logo chip's optical weight */
+.xp-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--xp-accent);
+}
+
+.xp-icon svg { width: 100%; height: 100%; display: block; }
+
+.xp-chip-mark.xp-icon {
+  width: 32px;
+  min-width: 32px;
+  height: 32px;
+  padding: 2px;
+}
+
+.xp-watermark-mark.xp-icon {
+  width: 160px;
+  height: 160px;
+  color: #000000;
+  filter: none;
+}
+
+/* Keep the blown-up watermark outline hairline-thin rather than slab-heavy */
+.xp-watermark-mark.xp-icon svg { stroke-width: 0.75; }
 
 .xp-role {
   font-size: 18px;
