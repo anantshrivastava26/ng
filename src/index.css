@@ -339,6 +339,34 @@ img { display: block; max-width: 100%; }
   justify-content: center;
 }
 
+/* Name ticker */
+.ch-ticker {
+  position: absolute;
+  top: 50%;
+  left: -24px;
+  right: -24px;
+  z-index: 1;
+  transform: translateY(-50%);
+  overflow: hidden;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.ch-ticker-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+}
+
+.ch-ticker-item {
+  flex-shrink: 0;
+  font-size: 240px;
+  font-weight: 900;
+  line-height: 1.2;
+  white-space: pre;
+  color: var(--ch-ink);
+}
+
 /* Profile stack: everything is positioned around the 280px photo card */
 .ch-profile {
   position: absolute;
@@ -569,7 +597,7 @@ img { display: block; max-width: 100%; }
 .ch-shape {
   position: absolute;
   z-index: 1;
-  width: 240px;
+  width: 180px;
   aspect-ratio: 1;
 }
 
@@ -600,7 +628,7 @@ img { display: block; max-width: 100%; }
 
 @media (min-width: 810px) and (max-width: 1199.98px) {
   .ch-shapes { flex: 1 0 0; width: 1px; height: 720px; }
-  .ch-shape { width: 200px; }
+  .ch-shape { width: 150px; }
 }
 
 @media (max-width: 809.98px) {
@@ -610,7 +638,7 @@ img { display: block; max-width: 100%; }
   .ch-tagline { font-size: 13px; }
 
   .ch-shapes { flex: 1 0 0; width: 1px; height: 700px; }
-  .ch-shape { width: 115px; }
+  .ch-shape { width: 92px; }
   .ch-shape.ch-shape { z-index: 0; }
 
   .ch-shape--figma       { top: 10px; left: 0; }
@@ -1760,7 +1788,7 @@ img { display: block; max-width: 100%; }
   --xp-accent: var(--accent);
   position: relative;
   padding: var(--section-gap) 0;
-  background: linear-gradient(to bottom, var(--bg) 0%, #ffffff 45%, #ffffff 70%, #f7f0fb 100%);
+  background: var(--bg);
   color: var(--xp-text);
 }
 

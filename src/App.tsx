@@ -35,8 +35,8 @@ export default function App() {
           <>
             <About />
             <Experience />
-            <Benefits />
             <Projects />
+            <Benefits />
             <Methodology />
           </>
         )}

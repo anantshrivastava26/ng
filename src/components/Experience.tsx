@@ -1,12 +1,13 @@
 import { motion } from 'framer-motion'
 
 /*
- * Experience & Internships — dark gradient band with a 3-column card grid.
+ * Experience & Internships — light gradient band with a 3-column card grid.
  * Each card: logo chip, role, company • location, period pill, divider,
  * bullet highlights, and a faint oversized watermark of the logo behind it.
  *
- * To use a real company logo, drop the file in /public/assets/experience/
+ * To use a real company logo/photo, drop the file in /public/assets/experience/
  * and set `logo` on the entry; otherwise the `mark` monogram is shown.
+ * With neither, the card has no chip and no watermark.
  */
 
 type ExperienceItem = {
@@ -14,7 +15,7 @@ type ExperienceItem = {
   company: string
   location: string
   period: string
-  mark: string
+  mark?: string
   logo?: string
   highlights: string[]
 }
@@ -26,6 +27,7 @@ const EXPERIENCE: ExperienceItem[] = [
     location: 'On-site',
     period: 'May 2026 – July 2026',
     mark: 'M',
+    logo: '/assets/experience/mcdonalds.png',
     highlights: [
       "Developed UI elements based on UX principles for an upcoming redesign of the official McDonald's website.",
       'Worked with interface hierarchy and navigation while maintaining a consistent visual direction.',
@@ -38,6 +40,7 @@ const EXPERIENCE: ExperienceItem[] = [
     location: 'Remote',
     period: 'Jun 2025 – Aug 2025',
     mark: 'AE',
+    logo: '/assets/experience/aarav-ethnics.png',
     highlights: [
       'Developed digital textile motifs and marketing strategies for a major retail brand.',
       'Refined visuals based on feedback to improve usability and brand consistency.',
@@ -48,7 +51,7 @@ const EXPERIENCE: ExperienceItem[] = [
     company: 'Independent',
     location: 'Remote',
     period: 'Jun 2025 – Present',
-    mark: 'NG',
+    logo: '/assets/experience/freelance.png',
     highlights: [
       'Created brand-consistent digital promotional assets.',
       'Managed projects from concept to final delivery with design consistency.',
@@ -110,6 +113,7 @@ function Reveal({
 }
 
 function Mark({ item, className }: { item: ExperienceItem; className: string }) {
+  if (!item.logo && !item.mark) return null
   return item.logo ? (
     <img src={item.logo} alt="" className={className} loading="lazy" />
   ) : (
@@ -147,14 +151,18 @@ export default function Experience() {
         >
           {EXPERIENCE.map((item) => (
             <motion.article key={item.company + item.title} className="xp-card" variants={cardVariants} whileHover={{ y: -6 }}>
-              <div className="xp-watermark" aria-hidden="true">
-                <Mark item={item} className="xp-watermark-mark" />
-              </div>
+              {(item.logo || item.mark) && (
+                <div className="xp-watermark" aria-hidden="true">
+                  <Mark item={item} className="xp-watermark-mark" />
+                </div>
+              )}
 
               <div className="xp-card-body">
-                <div className="xp-chip">
-                  <Mark item={item} className="xp-chip-mark" />
-                </div>
+                {(item.logo || item.mark) && (
+                  <div className="xp-chip">
+                    <Mark item={item} className="xp-chip-mark" />
+                  </div>
+                )}
 
                 <h3 className="xp-role">{item.title}</h3>
                 <p className="xp-meta">
