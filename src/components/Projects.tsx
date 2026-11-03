@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, motion, useMotionValue, useSpring } from 'framer-motion'
 
 import SectionTag, { WorkIcon } from './SectionTag'
 
@@ -22,11 +22,10 @@ const revealContainerVariants = {
 }
 
 const revealWordVariants = {
-  hidden: { opacity: 0, y: 10, filter: 'blur(3px)' },
+  hidden: { opacity: 0, y: 10 },
   visible: {
     opacity: 1,
     y: 0,
-    filter: 'blur(0px)',
     transition: { duration: 1.1, ease: [0.22, 1, 0.36, 1] as const },
   },
 }
@@ -48,9 +47,9 @@ const SAANJH_PROJECT = 'https://www.behance.net/gallery/247285389/Saanjh-A-Digit
 const PAWZO_PROJECT = 'https://www.behance.net/gallery/247289205/Pawzo-A-Pet-Stay-App'
 const NEUROVISOR_PROJECT = 'https://www.behance.net/gallery/246681547/NEUROVISOR-X-A-Futuristic-Smart-Helmet'
 const TREND_FORECASTING_PDF = '/misc/trend%20forecasting.pdf'
-const TREND_FORECASTING_COVER = '/misc/cover.png'
+const TREND_FORECASTING_COVER = '/misc/cover.webp'
 const COFFEE_TABLE_BOOK_PDF = '/misc/coffee%20table%20book.pdf'
-const COFFEE_TABLE_BOOK_COVER = '/misc/coverrr.png'
+const COFFEE_TABLE_BOOK_COVER = '/misc/coverrr.webp'
 const TRASH_BASH_PROJECT = 'public/assets/TRASH BASH.pdf'
 
 const projects: Project[] = [
@@ -58,7 +57,7 @@ const projects: Project[] = [
     name: 'Trash Bash',
     desc: 'A community cleanup initiative',
     tags: ['Campaign', 'Research'],
-    image: '/assets/trash-bash.png',
+    image: '/assets/trash-bash.webp',
     link: TRASH_BASH_PROJECT,
     downloadFileName: 'TRASH BASH.pdf',
     linkLabel: 'View Project ↗',
@@ -110,16 +109,24 @@ const miscellaneousProjects: Project[] = [
 
 function ProjectTile({ project, index }: { project: Project; index: number }) {
   const imgRef = useRef<HTMLDivElement>(null)
-  const [tilt, setTilt] = useState({ x: 0, y: 0 })
+  // Motion values (not state) so tilting doesn't re-render the tile on every mousemove
+  const tiltX = useMotionValue(0)
+  const tiltY = useMotionValue(0)
+  const rotateY = useSpring(tiltX, { stiffness: 200, damping: 25 })
+  const rotateX = useSpring(tiltY, { stiffness: 200, damping: 25 })
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const r = e.currentTarget.getBoundingClientRect()
     const x = (e.clientX - r.left) / r.width - 0.5
     const y = (e.clientY - r.top) / r.height - 0.5
-    setTilt({ x: x * 8, y: -y * 8 })
+    tiltX.set(x * 8)
+    tiltY.set(-y * 8)
   }
 
-  const handleMouseLeave = () => setTilt({ x: 0, y: 0 })
+  const handleMouseLeave = () => {
+    tiltX.set(0)
+    tiltY.set(0)
+  }
 
   return (
     <motion.div
@@ -143,8 +150,8 @@ function ProjectTile({ project, index }: { project: Project; index: number }) {
           ref={imgRef}
           className="project-tile-img"
           style={{
-            rotateY: tilt.x,
-            rotateX: tilt.y,
+            rotateY,
+            rotateX,
             transformPerspective: 800,
           }}
           transition={{ type: 'spring', stiffness: 200, damping: 25 }}
@@ -154,6 +161,8 @@ function ProjectTile({ project, index }: { project: Project; index: number }) {
             src={project.image}
             alt={project.name}
             className="project-tile-photo"
+            loading="lazy"
+            decoding="async"
             style={project.imagePosition ? { objectPosition: project.imagePosition } : undefined}
           />
           <div className="project-tags">

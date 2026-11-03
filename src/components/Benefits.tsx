@@ -20,11 +20,10 @@ const revealContainerVariants = {
 }
 
 const revealWordVariants = {
-  hidden: { opacity: 0, y: 10, filter: 'blur(3px)' },
+  hidden: { opacity: 0, y: 10 },
   visible: {
     opacity: 1,
     y: 0,
-    filter: 'blur(0px)',
     transition: { duration: 1.1, ease: [0.22, 1, 0.36, 1] as const },
   },
 }
@@ -147,7 +146,9 @@ export default function Benefits() {
 
           <BentoCard className="bento-card--center" delay={0.1} glowColor="rgba(26,71,42,0.12)">
             <motion.img
-              src="/assets/logos/hog.jpg"
+              src="/assets/logos/hog.webp"
+              loading="lazy"
+              decoding="async"
               alt="Center visual"
               className="bento-center-img"
               animate={{ scale: [1, 1.03, 1] }}

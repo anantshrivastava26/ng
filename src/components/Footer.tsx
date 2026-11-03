@@ -2,13 +2,13 @@ import { motion } from 'framer-motion'
 
 const LINKEDIN_URL = 'https://www.linkedin.com/in/navyagrover/'
 const BEHANCE_URL = 'https://www.behance.net/navyagrover5'
-const RESUME_IMAGE_URL = '/resume.png'
+const RESUME_URL = '/Navya-Grover-Resume.pdf'
 
 const links = [
   { label: 'LinkedIn', href: LINKEDIN_URL, external: true },
   { label: 'Gmail', href: 'mailto:grovnavya@gmail.com', external: false },
   { label: 'Behance', href: BEHANCE_URL, external: true },
-  { label: 'Resume', href: RESUME_IMAGE_URL, external: false, download: true },
+  { label: 'Resume', href: RESUME_URL, external: false, download: true },
 ]
 
 export default function Footer() {
@@ -54,7 +54,7 @@ export default function Footer() {
                 <motion.a
                   key={link.label}
                   href={link.href}
-                  download={link.download ? 'resume.png' : undefined}
+                  download={link.download ? 'Navya-Grover-Resume.pdf' : undefined}
                   target={link.external ? '_blank' : undefined}
                   rel={link.external ? 'noreferrer' : undefined}
                   initial={{ opacity: 0, x: 20 }}
