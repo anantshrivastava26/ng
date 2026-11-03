@@ -316,7 +316,7 @@ img { display: block; max-width: 100%; }
   --ch-ink: #000000;
   --ch-muted: #4d4d4d;
   --ch-indigo: #6670ff;
-  --ch-lavender: #c7a7eb;
+  --ch-avatar-bg: #c7a7eb;
   --ch-card: #ffffff;
   position: relative;
   width: 100%;
@@ -519,7 +519,7 @@ img { display: block; max-width: 100%; }
 }
 
 .ch-photo-front {
-  background: var(--ch-lavender);
+  background: var(--ch-avatar-bg);
 }
 
 .ch-photo-img {

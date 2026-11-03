@@ -187,7 +187,7 @@ function ArrowDown({ className }: { className?: string }) {
 }
 
 /**
- * The template's flip card. Front: avatar illustration on lavender, tilted 10°.
+ * The template's flip card. Front: avatar illustration on lilac, tilted 10°.
  * Hover (desktop only): the front spins to -180° and the frosted "scroll down"
  * back swings in to -10°, using the template's values and spring.
  * If the avatar image is missing, only the back face is shown (no flip).
