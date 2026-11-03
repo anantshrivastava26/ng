@@ -62,7 +62,7 @@ export default function About() {
             transition={{ duration: 3, ease: [0.22, 1, 0.36, 1] }}
           >
             <div className="about-media-accent" aria-hidden="true" />
-            <img src="/assets/portfolio-pic.webp" alt="Navya Grover" className="about-portrait" loading="lazy" decoding="async" />
+            <img src="/assets/about-portrait-bw.webp" alt="Navya Grover" className="about-portrait" loading="lazy" decoding="async" />
           </motion.figure>
 
           <motion.div

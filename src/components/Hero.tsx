@@ -1,14 +1,25 @@
 import { useEffect, useId, useLayoutEffect, useRef, useState, type RefObject } from 'react'
-import { animate, motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
+import {
+  animate,
+  motion,
+  useAnimationFrame,
+  useMotionValue,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+} from 'framer-motion'
 
 /*
  * Landing hero:
+ * - giant "NAVYA GROVER" ticker looping behind the profile stack
  * - "Designing experiences!" heading + "UX/UI Design" pill above the avatar card
  * - flip-on-hover avatar card (desktop), tagline + resume CTA below it
  * - floating 3D tool logos that pop out from behind the avatar card once the
  *   loader finishes, then settle into a gentle bob with scroll parallax
  *   (Framer-style speed: 100 = moves with the page, >100 faster, <100 slower)
  */
+
+const NAME = 'NAVYA GROVER '
 
 const RESUME_URL = '/Navya-Grover-Resume.pdf'
 
@@ -62,6 +73,49 @@ function useParallax(speed: number) {
 }
 
 /* ── pieces ──────────────────────────────────────────────────────────────── */
+
+function NameTicker({ text, speed }: { text: string; speed: number }) {
+  const wrapRef = useRef<HTMLDivElement>(null)
+  const itemRef = useRef<HTMLDivElement>(null)
+  const [itemWidth, setItemWidth] = useState(0)
+  const [copies, setCopies] = useState(2)
+  const x = useMotionValue(0)
+  const reduce = useReducedMotion()
+
+  useLayoutEffect(() => {
+    const measure = () => {
+      const w = itemRef.current?.offsetWidth ?? 0
+      const cw = wrapRef.current?.offsetWidth ?? 0
+      setItemWidth(w)
+      if (w > 0) setCopies(Math.ceil(cw / w) + 1)
+    }
+    measure()
+    const ro = new ResizeObserver(measure)
+    if (wrapRef.current) ro.observe(wrapRef.current)
+    if (itemRef.current) ro.observe(itemRef.current)
+    document.fonts?.ready.then(measure).catch(() => {})
+    return () => ro.disconnect()
+  }, [])
+
+  useAnimationFrame((_, delta) => {
+    if (!itemWidth || reduce) return
+    let next = x.get() - (speed * delta) / 1000
+    if (next <= -itemWidth) next += itemWidth
+    x.set(next)
+  })
+
+  return (
+    <div ref={wrapRef} className="ch-ticker" aria-hidden="true" style={{ opacity: itemWidth ? 1 : 0 }}>
+      <motion.div className="ch-ticker-track" style={{ x }}>
+        {Array.from({ length: copies }, (_, i) => (
+          <div key={i} ref={i === 0 ? itemRef : undefined} className="ch-ticker-item">
+            {text}
+          </div>
+        ))}
+      </motion.div>
+    </div>
+  )
+}
 
 function ArcText({ text }: { text: string }) {
   const id = `arc-${useId().replace(/:/g, '')}`
@@ -293,6 +347,8 @@ export default function Hero({ ready = true }: { ready?: boolean }) {
   return (
     <section className="ch-hero" id="hero">
       <div className="ch-top">
+        {!phone && <NameTicker text={NAME} speed={60} />}
+
         <div className="ch-profile">
           <motion.h1 className="ch-hi" style={{ x: '-50%', y: yHeading }}>
             Designing <span>experiences</span>!
