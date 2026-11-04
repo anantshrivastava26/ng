@@ -1307,14 +1307,14 @@ img { display: block; max-width: 100%; }
 }
 
 .project-link {
-  font-size: 14px;
+  font-size: 17px;
   font-weight: 600;
   letter-spacing: -0.02em;
   color: var(--accent);
   transition: gap var(--fast);
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
 }
 
 .project-link:hover { gap: 8px; }
