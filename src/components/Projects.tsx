@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
-import { AnimatePresence, motion, useInView, useMotionValue, useSpring } from 'framer-motion'
+import { useEffect, useRef, useState } from 'react'
+import { AnimatePresence, motion, useMotionValue, useSpring } from 'framer-motion'
 
 import SectionTag, { WorkIcon } from './SectionTag'
 
@@ -66,6 +66,7 @@ const projects: Project[] = [
     tags: ['UX Design', 'Interface Design'],
     image: '/assets/projects/pawzo.png',
     link: PAWZO_PROJECT,
+    offset: true,
   },
   {
     name: 'NeurovisorX',
@@ -102,7 +103,7 @@ const miscellaneousProjects: Project[] = [
   },
 ]
 
-function ProjectTile({ project, index, hideTitle = false }: { project: Project; index: number; hideTitle?: boolean }) {
+function ProjectTile({ project, index }: { project: Project; index: number }) {
   const imgRef = useRef<HTMLDivElement>(null)
   // Motion values (not state) so tilting doesn't re-render the tile on every mousemove
   const tiltX = useMotionValue(0)
@@ -168,7 +169,7 @@ function ProjectTile({ project, index, hideTitle = false }: { project: Project; 
         </motion.div>
       </a>
       <div className="project-tile-info">
-        {!hideTitle && <h3>{project.name}</h3>}
+        <h3>{project.name}</h3>
         <p>{project.desc}</p>
         <motion.a
           href={encodeURI(project.link)}
@@ -182,97 +183,6 @@ function ProjectTile({ project, index, hideTitle = false }: { project: Project; 
         </motion.a>
       </div>
     </motion.div>
-  )
-}
-
-const formatProjectNumber = (index: number) => String(index + 1).padStart(2, '0')
-
-// Number slides up when scrolling down, and down when scrolling back up
-const projectNumberVariants = {
-  enter: (direction: number) => ({ y: direction > 0 ? '100%' : '-100%', opacity: 0 }),
-  center: { y: '0%', opacity: 1 },
-  exit: (direction: number) => ({ y: direction > 0 ? '-100%' : '100%', opacity: 0 }),
-}
-
-function ProjectScrollItem({
-  project,
-  index,
-  onActive,
-}: {
-  project: Project
-  index: number
-  onActive: (index: number) => void
-}) {
-  const ref = useRef<HTMLDivElement>(null)
-  // True while this item crosses the vertical centre of the viewport
-  const isCentered = useInView(ref, { margin: '-50% 0px -50% 0px' })
-
-  useEffect(() => {
-    if (isCentered) onActive(index)
-  }, [isCentered, index, onActive])
-
-  return (
-    <div ref={ref} className="projects-scroll-item">
-      {/* Inline number + title, shown only on mobile where the sticky column is hidden */}
-      <div className="projects-scroll-inline-head">
-        <span className="projects-scroll-inline-number">{formatProjectNumber(index)}</span>
-        <h3 className="projects-scroll-title">{project.name}</h3>
-      </div>
-      <ProjectTile project={project} index={0} hideTitle />
-    </div>
-  )
-}
-
-function ProjectsStickyScroll() {
-  const [active, setActive] = useState({ index: 0, direction: 1 })
-
-  const handleActive = useCallback((index: number) => {
-    setActive((prev) => (prev.index === index ? prev : { index, direction: index > prev.index ? 1 : -1 }))
-  }, [])
-
-  const activeProject = projects[active.index]
-
-  return (
-    <div className="projects-scroll">
-      <div className="projects-scroll-left">
-        <div className="projects-scroll-sticky">
-          <div className="projects-scroll-number-wrap" aria-hidden="true">
-            <AnimatePresence initial={false} custom={active.direction}>
-              <motion.span
-                key={active.index}
-                className="projects-scroll-number"
-                custom={active.direction}
-                variants={projectNumberVariants}
-                initial="enter"
-                animate="center"
-                exit="exit"
-                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              >
-                {formatProjectNumber(active.index)}
-              </motion.span>
-            </AnimatePresence>
-          </div>
-          <AnimatePresence mode="wait" initial={false}>
-            <motion.h3
-              key={activeProject.name}
-              className="projects-scroll-title"
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -12 }}
-              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            >
-              {activeProject.name}
-            </motion.h3>
-          </AnimatePresence>
-        </div>
-      </div>
-
-      <div className="projects-scroll-right">
-        {projects.map((project, i) => (
-          <ProjectScrollItem key={project.name} project={project} index={i} onActive={handleActive} />
-        ))}
-      </div>
-    </div>
   )
 }
 
@@ -374,7 +284,11 @@ export default function Projects() {
           </div>
         </div>
 
-        <ProjectsStickyScroll />
+        <div className="projects-grid">
+          {projects.map((project, i) => (
+            <ProjectTile key={project.name} project={project} index={i} />
+          ))}
+        </div>
       </div>
     </section>
     <AnimatePresence>
