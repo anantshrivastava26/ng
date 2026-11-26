@@ -46,11 +46,11 @@ const BASE = 'https://framerusercontent.com/images/'
 const SAANJH_PROJECT = 'https://www.behance.net/gallery/247285389/Saanjh-A-Digital-Experience-for-Craft-Led-Lighting'
 const PAWZO_PROJECT = 'https://www.behance.net/gallery/247289205/Pawzo-A-Pet-Stay-App'
 const NEUROVISOR_PROJECT = 'https://www.behance.net/gallery/246681547/NEUROVISOR-X-A-Futuristic-Smart-Helmet'
-const TREND_FORECASTING_PDF = 'https://drive.google.com/file/d/1lCpsrCCaIIj9fmd3PK0eL7NYssBY6kmv/view?usp=sharing'
+const TREND_FORECASTING_PDF = '/projects/trend-forecasting.pdf'
 const TREND_FORECASTING_COVER = '/misc/cover.webp'
-const COFFEE_TABLE_BOOK_PDF = 'https://drive.google.com/file/d/1UKYJ-5-XWRL5AuGcrpCHGY3bfuYg7cHD/view?usp=sharing'
+const COFFEE_TABLE_BOOK_PDF = '/projects/coffee-table-book.pdf'
 const COFFEE_TABLE_BOOK_COVER = '/misc/coverrr.webp'
-const TRASH_BASH_PROJECT = 'https://drive.google.com/file/d/1lY2CrZpuPOH8eIYMKxqftyBjpXJBEDby/view?usp=sharing'
+const TRASH_BASH_PROJECT = '/projects/trash-bash.pdf'
 
 const projects: Project[] = [
   {
