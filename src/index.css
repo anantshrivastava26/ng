@@ -1015,17 +1015,6 @@ img { display: block; max-width: 100%; }
   z-index: 1;
 }
 
-.bento-center-img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 0;
-  opacity: 0.10;
-  border-radius: 0;
-}
-
 .notification-card {
   width: min(100%, 318px);
   background: #1A472A;
