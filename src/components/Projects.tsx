@@ -46,11 +46,11 @@ const BASE = 'https://framerusercontent.com/images/'
 const SAANJH_PROJECT = 'https://www.behance.net/gallery/247285389/Saanjh-A-Digital-Experience-for-Craft-Led-Lighting'
 const PAWZO_PROJECT = 'https://www.behance.net/gallery/247289205/Pawzo-A-Pet-Stay-App'
 const NEUROVISOR_PROJECT = 'https://www.behance.net/gallery/246681547/NEUROVISOR-X-A-Futuristic-Smart-Helmet'
-const TREND_FORECASTING_PDF = '/misc/trend%20forecasting.pdf'
+const TREND_FORECASTING_PDF = 'https://drive.google.com/file/d/1lCpsrCCaIIj9fmd3PK0eL7NYssBY6kmv/view?usp=sharing'
 const TREND_FORECASTING_COVER = '/misc/cover.webp'
-const COFFEE_TABLE_BOOK_PDF = '/misc/coffee%20table%20book.pdf'
+const COFFEE_TABLE_BOOK_PDF = 'https://drive.google.com/file/d/1UKYJ-5-XWRL5AuGcrpCHGY3bfuYg7cHD/view?usp=sharing'
 const COFFEE_TABLE_BOOK_COVER = '/misc/coverrr.webp'
-const TRASH_BASH_PROJECT = 'public/assets/TRASH BASH.pdf'
+const TRASH_BASH_PROJECT = 'https://drive.google.com/file/d/1lY2CrZpuPOH8eIYMKxqftyBjpXJBEDby/view?usp=sharing'
 
 const projects: Project[] = [
   {
@@ -59,8 +59,6 @@ const projects: Project[] = [
     tags: ['Campaign', 'Research'],
     image: '/assets/projects/trash-bash.png',
     link: TRASH_BASH_PROJECT,
-    downloadFileName: 'TRASH BASH.pdf',
-    linkLabel: 'View Project ↗',
   },
   {
     name: 'Pawzo',
@@ -92,7 +90,6 @@ const miscellaneousProjects: Project[] = [
     tags: ['Research', 'Forecasting'],
     image: TREND_FORECASTING_COVER,
     link: TREND_FORECASTING_PDF,
-    downloadFileName: 'trend forecasting.pdf',
     imagePosition: '0% center',
   },
   {
@@ -101,7 +98,6 @@ const miscellaneousProjects: Project[] = [
     tags: ['Editorial', 'Visual Design'],
     image: COFFEE_TABLE_BOOK_COVER,
     link: COFFEE_TABLE_BOOK_PDF,
-    downloadFileName: 'coffee table book.pdf',
     imagePosition: 'center center',
   },
 ]

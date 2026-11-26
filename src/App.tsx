@@ -35,8 +35,8 @@ export default function App() {
         {showContent && (
           <>
             <About />
-            <Experience />
             <Projects />
+            <Experience />
             <Benefits />
             <Methodology />
           </>

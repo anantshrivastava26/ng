@@ -145,16 +145,6 @@ export default function Benefits() {
           </BentoCard>
 
           <BentoCard className="bento-card--center" delay={0.1} glowColor="rgba(26,71,42,0.12)">
-            <motion.img
-              src="/assets/logos/hog.webp"
-              loading="lazy"
-              decoding="async"
-              alt="Center visual"
-              className="bento-center-img"
-              animate={{ scale: [1, 1.03, 1] }}
-              transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
-            />
-
             <div className="bento-top bento-center-content">
               <SectionTag label="Design Thinking" icon={<ThinkingIcon />} className="small" />
               <p className="bento-heading">Developing high fidelity interfaces that balance beauty and usability.</p>
